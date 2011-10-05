@@ -1,4 +1,5 @@
 class Category < ActiveRecord::Base
+
 end
 
 # == Schema Information
