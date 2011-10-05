@@ -1,4 +1,10 @@
 Giveaway::Application.routes.draw do
+  root :to => "pages#home"
+  
+  match '/about' => "pages#about"
+  
+  match '/contact' => "pages#contact"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

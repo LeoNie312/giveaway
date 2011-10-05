@@ -1,0 +1,64 @@
+body{
+	background: #ccc;
+}
+
+section {
+	font-size: 120%;
+}
+
+.container{
+	width: 750px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 25px;
+	padding: 20px;
+	background: white;
+}
+
+div#main {
+	padding-top: 20px;
+}
+
+.round {
+  -moz-border-radius:    10px;
+  -webkit-border-radius: 10px;
+  border-radius:         10px;
+}
+
+
+/*This part is for non-signed-in Homepage*/
+ul#homeButton {
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+ul#homeButton li {
+	list-style-type: none;
+	display: inline-block;
+/*	margin: 0px, 10px;*/
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+a.button#signup {
+	font-size: 250%;
+}
+
+a.button {
+	text-decoration: none;
+	background: #fc9d1c;
+	padding: 20px;
+	font-size: 150%;
+}
+
+
+a.button:link {
+}
+
+a.button:visited {
+
+}
+
+a.button:hover {
+
+}
