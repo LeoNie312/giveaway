@@ -2,13 +2,21 @@
 <html>
 <head>
   <title>Giveaway</title>
-  <%= stylesheet_link_tag :all %>
+  <%= render 'layouts/stylesheets' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+<div class="container">
+	<%= render 'layouts/header'%>
+    <section class="round">
+		<% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+      <%= yield %>
+    </section>
+	<%= render 'layouts/footer'%>
 
-<%= yield %>
-
+</div>
 </body>
 </html>
