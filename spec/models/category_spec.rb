@@ -1,10 +1,34 @@
 require 'spec_helper'
 
 describe Category do
+  
+  before :each do
+    @category = Category.create({:name => "base"})
+  end
 
   describe "item associate" do
-    pending "finish after break"
+    
+    before :each do
+      @item1 = Factory(:item, :category=>@category, :created_at => 1.day.ago)
+      @item2 = Factory(:item, :category=>@category, :created_at => 1.hour.ago)
+    end
+    
+    it "should has an item association" do
+      @category.should respond_to(:items)
+    end
+    
+    it "should have the right items in the right order" do
+      @category.items.should == [@item2, @item1]
+    end
+    
+    it "should destroy associated items" do
+      @category.destroy
+      [@item1, @item2].each do |item|
+        Item.find_by_id(item.id).should be_nil
+      end
+    end
   end
+  
 end
 
 # == Schema Information

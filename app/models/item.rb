@@ -9,4 +9,6 @@ class Item < ActiveRecord::Base
   validates :category_id, :presence => true
   
   belongs_to :category
+  
+  default_scope :order => 'items.created_at DESC'
 end
