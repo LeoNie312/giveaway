@@ -67,6 +67,14 @@ describe User do
     user_with_duplicate_name = User.new(@attr.merge(:email => "foo@e.ntu.edu.sg"))
     user_with_duplicate_name.should_not be_valid
   end
+  
+  it "should reject non-numerical handphone inputs or handphone numbers with more than 8 digits" do
+    numbers = ["1234 678", "+65123456", "q2345678", "1234567", "123456789"]
+    numbers.each do |number|
+      invalid_hp_user = User.new(@attr.merge(:hp => number))
+      invalid_hp_user.should_not be_valid
+    end
+  end
 
 end
 

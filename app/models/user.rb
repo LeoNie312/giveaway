@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :hp
   
   ntu_email_regex = /\A[\w+\-.]+@(e\.)?ntu\.edu\.sg/i
+  hp_regex = /\A\d{8}\z/
   
   validates :name, :presence   => true,
                    :length     => { :maximum => 50 },
@@ -11,7 +12,8 @@ class User < ActiveRecord::Base
                     :format     => { :with => ntu_email_regex },
                     :uniqueness => { :case_sensitive => false }
                     
-  validates :hp, :presence => true
+  validates :hp, :presence => true,
+                 :format   => { :with => hp_regex }
 end
 
 # == Schema Information
