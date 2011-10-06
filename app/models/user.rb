@@ -1,5 +1,17 @@
 class User < ActiveRecord::Base
-  attr_accessibe :name, :email, :hp
+  attr_accessible :name, :email, :hp
+  
+  ntu_email_regex = /\A[\w+\-.]+@(e\.)?ntu\.edu\.sg/i
+  
+  validates :name, :presence   => true,
+                   :length     => { :maximum => 50 },
+                   :uniqueness => true  # But do we really need unique username?
+                   
+  validates :email, :presence   => true,
+                    :format     => { :with => ntu_email_regex },
+                    :uniqueness => { :case_sensitive => false }
+                    
+  validates :hp, :presence => true
 end
 
 # == Schema Information
