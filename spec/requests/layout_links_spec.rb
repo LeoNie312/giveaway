@@ -42,6 +42,18 @@ describe "static pages" do
     it "should have a browse button" do
       response.should have_selector('a', :content=>"Browse")
     end
+    
+    it "should have a home link and it works" do
+      response.should have_selector('a', :content=>"Home")
+      click_link "Home"
+      response.should have_selector('title',:content=>"Home")      
+    end
+    
+    it "should have a contact link and it works" do
+      response.should have_selector('a', :content=>"Contact us")
+      click_link "Contact us"
+      response.should have_selector('title',:content=>"Contact")      
+    end
   end
 
 end
