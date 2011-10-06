@@ -1,7 +1,10 @@
 require 'spec_helper'
 
 describe Category do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  describe "item associate" do
+    pending "finish after break"
+  end
 end
 
 # == Schema Information
