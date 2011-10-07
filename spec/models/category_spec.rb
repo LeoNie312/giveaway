@@ -9,17 +9,20 @@ describe Category do
   describe "item associate" do
     
     before :each do
-      @item1 = Factory(:item, :category=>@category, :created_at => 1.day.ago)
-      @item2 = Factory(:item, :category=>@category, :created_at => 1.hour.ago)
+      @item1 = Factory(:item, :category=>@category)
+      sleep(1) # this makes @item2 created later than @item1
+      @item2 = Factory(:item, :category=>@category)
     end
     
     it "should has an item association" do
       @category.should respond_to(:items)
     end
     
-    it "should have the right items in the right order" do
+    it "should have the right items in the right order, at items' creation" do
       @category.items.should == [@item2, @item1]
     end
+    
+    it "should have the right items in the right order, when one item is re-onshelved"
     
     it "should destroy associated items" do
       @category.destroy

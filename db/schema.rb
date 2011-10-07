@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111006032123) do
+ActiveRecord::Schema.define(:version => 20111007011405) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20111006032123) do
     t.boolean  "onshelf",     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "onshelf_at"
   end
 
 end

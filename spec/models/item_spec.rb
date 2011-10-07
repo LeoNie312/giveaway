@@ -75,6 +75,11 @@ describe Item do
     it "should require the category id" do
       Item.new(@attr).should_not be_valid
     end
+    
+    it "should require the onshelf time at creation" do
+      @item.save
+      @item.onshelf_at.should_not be_nil
+    end
   end
   
 
