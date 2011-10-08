@@ -94,3 +94,20 @@ a.button:visited {
 a.button:hover {
 
 }
+
+div#locations {
+	border: medium solid #fc9d1c;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-bottom: 20px;
+	margin-right: 20px;
+	width: 200px;
+	float: left;
+}
+
+div#locations h1 {
+	color: #dc3030;
+	text-align: center;
+}
+
+
