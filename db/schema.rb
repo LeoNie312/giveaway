@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111007011405) do
+ActiveRecord::Schema.define(:version => 20111008025030) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -39,5 +39,17 @@ ActiveRecord::Schema.define(:version => 20111007011405) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
+  create_table "wishes", :force => true do |t|
+    t.integer  "wanter_id"
+    t.integer  "category_id"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "wishes", ["category_id"], :name => "index_wishes_on_category_id"
+  add_index "wishes", ["item_id"], :name => "index_wishes_on_item_id"
+  add_index "wishes", ["wanter_id"], :name => "index_wishes_on_wanter_id"
 
 end

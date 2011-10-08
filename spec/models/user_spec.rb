@@ -14,69 +14,84 @@ describe User do
     User.create!(@attr)
   end
   
-  it "should require a name" do
-    no_name_user = User.new(@attr.merge(:name => ""))
-    no_name_user.should_not be_valid
-  end
+  describe "validation" do
   
-  it "should require an email address" do
-    no_email_user = User.new(@attr.merge(:email => ""))
-    no_email_user.should_not be_valid
-  end
+    it "should require a name" do
+      no_name_user = User.new(@attr.merge(:name => ""))
+      no_name_user.should_not be_valid
+    end
   
-  it "should require a handphone number" do
-    no_hp_user = User.new(@attr.merge(:hp => ""))
-    no_hp_user.should_not be_valid
-  end
+    it "should require an email address" do
+      no_email_user = User.new(@attr.merge(:email => ""))
+      no_email_user.should_not be_valid
+    end
   
-  it "should reject names that are too long" do
-    long_name = "a" * 51
-    long_name_user = User.new(@attr.merge(:name => long_name))
-    long_name_user.should_not be_valid
-  end
+    it "should require a handphone number" do
+      no_hp_user = User.new(@attr.merge(:hp => ""))
+      no_hp_user.should_not be_valid
+    end
   
-  it "should accept 'ntu.edu.sg' or 'e.ntu.edu.sg' email addresses" do
-    addresses = %w[user@ntu.edu.sg THE_USER@ntu.edu.sg first.last@ntu.edu.sg 
-                   user@e.ntu.edu.sg THE_USER@e.ntu.edu.sg first.last@e.ntu.edu.sg]
-    addresses.each do |address|
-      valid_email_user = User.new(@attr.merge(:email => address))
-      valid_email_user.should be_valid
+    it "should reject names that are too long" do
+      long_name = "a" * 51
+      long_name_user = User.new(@attr.merge(:name => long_name))
+      long_name_user.should_not be_valid
+    end
+  
+    it "should accept 'ntu.edu.sg' or 'e.ntu.edu.sg' email addresses" do
+      addresses = %w[user@ntu.edu.sg THE_USER@ntu.edu.sg first.last@ntu.edu.sg 
+                     user@e.ntu.edu.sg THE_USER@e.ntu.edu.sg first.last@e.ntu.edu.sg]
+      addresses.each do |address|
+        valid_email_user = User.new(@attr.merge(:email => address))
+        valid_email_user.should be_valid
+      end
+    end
+  
+    it "should reject email addresses not ending with 'ntu.edu.sg' or 'e.ntu.edu.sg'" do
+      addresses = %w[bertil@ntu.edu.org ANDERSSON@ntu.edu user@foo,com user_at_foo.org example.user@foo.]
+      addresses.each do |address|
+        invalid_email_user = User.new(@attr.merge(:email => address))
+        invalid_email_user.should_not be_valid
+      end
+    end
+  
+    it "should reject duplicate email addresses" do
+      User.create!(@attr)
+      user_with_duplicate_email = User.new(@attr.merge(:name => "Another User"))
+      user_with_duplicate_email.should_not be_valid
+    end
+  
+    it "should reject email addresses identical up to case" do
+      User.create!(@attr)
+      upcased_email = @attr[:email].upcase
+      user_with_duplicate_email = User.new(@attr.merge(:name => "Another User", :email => upcased_email))
+      user_with_duplicate_email.should_not be_valid
+    end
+  
+    it "should reject duplicate names" do
+      User.create!(@attr)
+      user_with_duplicate_name = User.new(@attr.merge(:email => "foo@e.ntu.edu.sg"))
+      user_with_duplicate_name.should_not be_valid
+    end
+  
+    it "should reject non-numerical handphone inputs or handphone numbers with more than 8 digits" do
+      numbers = ["1234 678", "+65123456", "q2345678", "1234567", "123456789"]
+      numbers.each do |number|
+        invalid_hp_user = User.new(@attr.merge(:hp => number))
+        invalid_hp_user.should_not be_valid
+      end
     end
   end
   
-  it "should reject email addresses not ending with 'ntu.edu.sg' or 'e.ntu.edu.sg'" do
-    addresses = %w[bertil@ntu.edu.org ANDERSSON@ntu.edu user@foo,com user_at_foo.org example.user@foo.]
-    addresses.each do |address|
-      invalid_email_user = User.new(@attr.merge(:email => address))
-      invalid_email_user.should_not be_valid
+  describe "association with wish" do
+    
+    before :each do
+      @user = Factory(:user)
     end
-  end
-  
-  it "should reject duplicate email addresses" do
-    User.create!(@attr)
-    user_with_duplicate_email = User.new(@attr.merge(:name => "Another User"))
-    user_with_duplicate_email.should_not be_valid
-  end
-  
-  it "should reject email addresses identical up to case" do
-    User.create!(@attr)
-    upcased_email = @attr[:email].upcase
-    user_with_duplicate_email = User.new(@attr.merge(:name => "Another User", :email => upcased_email))
-    user_with_duplicate_email.should_not be_valid
-  end
-  
-  it "should reject duplicate names" do
-    User.create!(@attr)
-    user_with_duplicate_name = User.new(@attr.merge(:email => "foo@e.ntu.edu.sg"))
-    user_with_duplicate_name.should_not be_valid
-  end
-  
-  it "should reject non-numerical handphone inputs or handphone numbers with more than 8 digits" do
-    numbers = ["1234 678", "+65123456", "q2345678", "1234567", "123456789"]
-    numbers.each do |number|
-      invalid_hp_user = User.new(@attr.merge(:hp => number))
-      invalid_hp_user.should_not be_valid
+    
+    it "should have a 'wishes' method" do
+      @user.should respond_to(:wishes)
     end
+    
   end
 
 end

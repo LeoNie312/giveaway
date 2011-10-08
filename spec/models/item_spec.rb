@@ -80,6 +80,8 @@ describe Item do
       @item.save
       @item.onshelf_at.should_not be_nil
     end
+    
+    it "should require the onshelf time when it's transferred"
   end
   
 

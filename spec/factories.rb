@@ -8,3 +8,9 @@ Factory.define :item do |i|
   i.association  :category
   i.onshelf       true
 end
+
+Factory.define :user do |u|
+  u.name     "Mark Zuckerberg"
+  u.email    "mark@e.ntu.edu.sg"
+  u.hp       "84257886"
+end

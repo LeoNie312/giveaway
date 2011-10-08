@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                     
   validates :hp, :presence => true,
                  :format   => { :with => hp_regex }
+                 
+  has_many :wishes, :foreign_key => 'wanter_id'
 end
 
 # == Schema Information
