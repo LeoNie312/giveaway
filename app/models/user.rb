@@ -15,7 +15,12 @@ class User < ActiveRecord::Base
   validates :hp, :presence => true,
                  :format   => { :with => hp_regex }
                  
-  has_many :wishes, :foreign_key => 'wanter_id'
+  has_many :wishes, :foreign_key => 'wanter_id',
+                    :dependent => :destroy
+  
+  has_many :items, :foreign_key => 'owner_id',
+                   :dependent => :destroy
+  
 end
 
 # == Schema Information

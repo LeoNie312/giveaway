@@ -5,7 +5,11 @@ describe Wish do
   before :each do
     @category = Factory(:category)
     @wanter = Factory(:user)
-    @wish = @wanter.wishes.build(:category_id=>@category.id)
+    @attr = {
+      :category_id => 1,
+      :item_id => 1
+    }
+    @wish = @wanter.wishes.build(@attr)
   end
   
   it "should create a new instance given valid attributes" do 
@@ -14,9 +18,15 @@ describe Wish do
   
   describe "validation" do
     
-    it "should require category id"
+    it "should require category id" do
+      invalid_wish = @wish.dup
+      invalid_wish.category_id = nil
+      invalid_wish.should_not be_valid
+    end
     
-    it "should require wanter id"
+    it "should require wanter id" do
+      Wish.new(@attr.merge(:wanter_id=>1)).should_not be_valid
+    end
     
   end
   
@@ -36,6 +46,14 @@ describe Wish do
         @wish.wanter.should == @wanter
         @wish.wanter_id.should == @wanter.id
       end
+    end
+    
+    describe "with category" do
+      pending
+    end
+    
+    describe "with item" do
+      pending
     end
   end
 end

@@ -82,16 +82,55 @@ describe User do
     end
   end
   
-  describe "association with wish" do
+  describe "association" do
     
-    before :each do
-      @user = Factory(:user)
+    describe "with wishes" do
+      before :each do
+        @user = User.create(@attr)
+        @wish1 = Factory(:wish, :wanter=>@user, :category_id => 1, :created_at=>1.day.ago)
+        @wish2 = Factory(:wish, :wanter=>@user,:category_id => 1, :created_at=>1.hour.ago)
+      end
+    
+      it "should have a 'wishes' method" do
+        @user.should respond_to(:wishes)
+      end
+    
+      it "should have the right wishes in the right order" do
+        @user.wishes.should == [@wish2, @wish1]
+      end
+      
+      it "should destroy associated wishes" do
+        @user.destroy
+        [@wish1, @wish2].each do |w|
+          Wish.find_by_id(w.id).should be_nil
+        end
+      end
     end
     
-    it "should have a 'wishes' method" do
-      @user.should respond_to(:wishes)
+    describe "with items" do
+      
+      before :each do
+        @user = User.create(@attr)
+        @item1 = Factory(:item, :owner=>@user)
+        sleep(1)
+        @item2 = Factory(:item, :owner=>@user)        
+      end
+      
+      it "should have a items method" do
+        @user.should respond_to(:items)
+      end
+      
+      it "should have the right items in the right order" do
+        @user.items.should == [@item2, @item1]
+      end
+      
+      it "should destroy associated items" do
+        @user.destroy
+        [@item1, @item2].each do |i|
+          Item.find_by_id(i.id).should be_nil
+        end
+      end
     end
-    
   end
 
 end
