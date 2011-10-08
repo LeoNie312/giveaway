@@ -28,4 +28,16 @@ ActiveRecord::Schema.define(:version => 20111007011405) do
     t.datetime "onshelf_at"
   end
 
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "hp"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
 end
