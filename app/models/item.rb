@@ -26,3 +26,18 @@ class Item < ActiveRecord::Base
       end
     end
 end
+
+# == Schema Information
+#
+# Table name: items
+#
+#  id          :integer         not null, primary key
+#  description :string(255)
+#  img_link    :string(255)
+#  category_id :integer
+#  onshelf     :boolean         default(TRUE)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  onshelf_at  :datetime
+#
+
