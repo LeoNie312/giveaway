@@ -29,6 +29,13 @@ class User < ActiveRecord::Base
                        
   before_save :encrypt_password
   
+  has_many :wishes, :foreign_key => 'wanter_id',
+                    :dependent => :destroy
+  
+  has_many :items, :foreign_key => 'owner_id',
+                   :dependent => :destroy
+  
+  
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
   end
@@ -56,7 +63,12 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
-  
+
+
+                 
+
+
+
 end
 
 

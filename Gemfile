@@ -1,9 +1,11 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.0'
 gem 'sqlite3'
 gem 'gravatar_image_tag'
-gem 'will_paginate', '3.0.pre2'
+gem 'will_paginate', '~> 3.0.2'
+gem 'jquery-rails'
+gem 'rack', '1.3.3'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,6 +32,12 @@ gem 'will_paginate', '3.0.pre2'
 # group :development, :test do
 #   gem 'webrat'
 # end
+
+group :assets do
+	gem 'sass-rails', "~> 3.1.0"
+ 	gem 'coffee-rails', "~> 3.1.0"
+	gem 'uglifier'
+end
 
 group :development do 
 	gem 'rspec-rails', '2.6.1'
