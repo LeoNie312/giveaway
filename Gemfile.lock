@@ -107,8 +107,7 @@ DEPENDENCIES
   gravatar_image_tag
   hirb
   rails (= 3.0.9)
-  rspec (>= 2.0.0.rc)
-  rspec-rails (>= 2.0.0.beta)
+  rspec-rails (= 2.6.1)
   spork
   sqlite3
   webrat (= 0.7.1)

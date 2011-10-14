@@ -14,8 +14,11 @@ Factory.define :user do |u|
   u.name     "Mark Zuckerberg"
   u.email    "mark@e.ntu.edu.sg"
   u.hp       "84257886"
+
   u.password "foobar"
   u.password_confirmation "foobar"
+
+
 end
 
 Factory.define :wish do |w|

@@ -1,5 +1,5 @@
 class Item < ActiveRecord::Base
-  attr_accessible :description, :img_link
+  attr_accessible :description, :img_link, :category_id
   
   before_save :calculate_onshelf_time
   
@@ -9,8 +9,11 @@ class Item < ActiveRecord::Base
   validates :img_link, :length => { :maximum => 100},
                        :format => { :with => link_regex }
   validates :category_id, :presence => true
+  validates :owner_id, :presence => true
   
   belongs_to :category
+  
+  belongs_to :owner, :class_name => 'User'
   
   default_scope :order => 'items.onshelf_at DESC'
   
