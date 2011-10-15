@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111008053634) do
+ActiveRecord::Schema.define(:version => 20111015041954) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20111008053634) do
     t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "connected_at"
   end
 
   add_index "wishes", ["category_id"], :name => "index_wishes_on_category_id"

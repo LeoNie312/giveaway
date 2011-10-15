@@ -7,5 +7,7 @@ class Wish < ActiveRecord::Base
   
   belongs_to :wanter, :class_name => "User"
   
+  belongs_to :item
+  
   default_scope :order => "wishes.created_at DESC"
 end

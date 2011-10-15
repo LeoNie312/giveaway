@@ -28,15 +28,20 @@ describe Wish do
       Wish.new(@attr.merge(:wanter_id=>1)).should_not be_valid
     end
     
+    it "should require connection time when connected to an item" #do
+    #   item = 
+    #   @wish.connect()
+    # end
+    
   end
   
   describe "association" do
     
+    before :each do
+      @wish.save
+    end
+    
     describe "with wanter" do
-      
-      before :each do
-        @wish.save
-      end
       
       it "should have a wanter method" do
         @wish.should respond_to(:wanter)
@@ -53,7 +58,13 @@ describe Wish do
     end
     
     describe "with item" do
-      pending
+      it "should have an item method" do
+        @wish.should respond_to(:item)
+      end
+      
+      it "should have the right item"
+      
+      it "should not assocaite to an item belongs to the same user"
     end
   end
 end

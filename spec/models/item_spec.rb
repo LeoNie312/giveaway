@@ -32,7 +32,18 @@ describe Item do
   end
   
   describe "wish association" do
-    pending
+    
+    before :each do
+      @item = @owner.items.create(@attr)      
+    end
+    
+    it "should have a wishes method" do
+      @item.should respond_to(:wishes)
+    end
+    
+    it "should have wishes DESC according to their connection time"
+    
+    it "should disconnect associated wishes at destroy"
   end
   
   describe "owner association" do
