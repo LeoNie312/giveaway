@@ -23,17 +23,35 @@ describe Category do
     end
     
     it "should have the right items in the right order, when one item is re-onshelved"
-    
-    # it "should destroy associated items" do
-    #   @category.destroy
-    #   [@item1, @item2].each do |item|
-    #     Item.find_by_id(item.id).should be_nil
-    #   end
-    # end
+
   end
   
   describe "wish association" do
-    pending
+    
+    before :each do
+      user1 = Factory(:user)
+      user2 = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
+      @wish1 = Factory(:wish, :category=>@category, :wanter=>user1, :created_at=>1.day.ago)
+      @wish2 = Factory(:wish, :category=>@category, :wanter=>user2, :created_at=>1.hour.ago)
+    end
+    
+    it "should have a wishes method" do
+      @category.should respond_to(:wishes)
+    end
+    
+    it "should have the right wishes in the right order" do
+      @category.wishes.should == [@wish2, @wish1]
+    end
+    
+    # To solve this, I need to find a way that 
+    # when wish is connected, category.wishes method 
+    # should not include that wish
+    it "should not include wish that is connected to a specific item" # do
+    #   an_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
+    #   item = Factory(:item, :owner=>an_user)
+    #   @wish1.connect(item)
+    #   @category.wishes.should_not include(@wish1)
+    # end
   end
   
 end

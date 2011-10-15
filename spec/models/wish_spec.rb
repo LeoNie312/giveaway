@@ -48,7 +48,14 @@ describe Wish do
     end
     
     describe "with category" do
-      pending "when don't let browsing users see wishes, don't implement this"
+      it "should have a category method" do
+        @wish.should respond_to(:category)
+      end
+      
+      it "should associate to the right category" do
+        @wish.category.should == @category
+        @wish.category_id.should == @category.id
+      end
     end
     
     describe "with item" do
@@ -99,7 +106,10 @@ describe Wish do
           another_item = Factory(:item, :owner=>another_user)
           @wish.connect(another_item).should be_false
         end
+        
+        it "should disconnect from the item when it timed-out or wish denied"
       end
+
     end
   end
 end

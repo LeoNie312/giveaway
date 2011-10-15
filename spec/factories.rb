@@ -21,7 +21,8 @@ Factory.define :user do |u|
 end
 
 Factory.define :wish do |w|
-  
+  w.association :wanter
+  w.association :category
 end
 
 Factory.sequence :email do |n|

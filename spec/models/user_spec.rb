@@ -165,8 +165,9 @@ describe User do
     describe "with wishes" do
       before :each do
         @user = User.create(@attr)
-        @wish1 = Factory(:wish, :wanter=>@user, :category_id => 1, :created_at=>1.day.ago)
-        @wish2 = Factory(:wish, :wanter=>@user,:category_id => 1, :created_at=>1.hour.ago)
+        category = Factory(:category)
+        @wish1 = Factory(:wish, :wanter=>@user, :category => category, :created_at=>1.day.ago)
+        @wish2 = Factory(:wish, :wanter=>@user,:category => category, :created_at=>1.hour.ago)
       end
     
       it "should have a 'wishes' method" do
