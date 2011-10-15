@@ -20,10 +20,14 @@ Factory.define :user do |u|
 
 end
 
-Factory.sequence :email do |n|
-  "person-#{n}@example.com"
-end
-
 Factory.define :wish do |w|
   
+end
+
+Factory.sequence :email do |n|
+  "person-#{n}@e.ntu.edu.sg"
+end
+
+Factory.sequence :name do |n|
+  "person-#{n}"
 end

@@ -10,4 +10,10 @@ class Wish < ActiveRecord::Base
   belongs_to :item
   
   default_scope :order => "wishes.created_at DESC"
+  
+  def connect item
+    self.connected_at = DateTime.now
+    self.item_id = item.id
+    self.save
+  end
 end
