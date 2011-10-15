@@ -56,8 +56,7 @@ describe Wish do
       before :each do
         another_user = Factory(:user, :email => Factory.next(:email),
                               :name => Factory.next(:name))
-        category = Factory(:category)
-        @item = another_user.items.create(:category => category.id)
+        @item = Factory(:item, :owner=>another_user)
       end
       
       it "should have an item method" do
@@ -65,6 +64,7 @@ describe Wish do
       end
       
       it "should require connection time when connected to an item" do
+        @item.id.should_not be_nil
         @wish.connected_at.should be_nil
         @wish.item_id.should be_nil
         @wish.connect(@item)
@@ -72,23 +72,34 @@ describe Wish do
         @wish.item_id.should_not be_nil      
       end
       
-      # describe "after connecting to an item" do
-      # 
-      #   before :each do
-      #     @wish.connect(@item)
-      #   end
-      # 
-      #   it "should have the right item" do 
-      #     @wish.item.should == @item
-      #     @wish.item_id.should == @item.id
-      #   end
-      # 
-      #   it "should not assocaite to an item belongs to the same user" do
-      #     item = @wish.item
-      #     @wish.wanter.should_not == item.owner
-      #     @wish.wanter_id.should_not == item.owner_id
-      #   end
-      # end
+      it "should not connect to an item belongs to the same user" do
+        item = Factory(:item, :owner=>@wanter)
+        @wish.connect(item).should be_false
+      end
+      
+      describe "after connecting to an item" do
+      
+        before :each do
+          @wish.connect(@item)
+        end
+      
+        it "should have the right item" do 
+          @wish.item.should == @item
+          @wish.item_id.should == @item.id
+        end
+      
+        it "should not be connected to the wanter's item" do
+          @wish.item.owner.should_not == @wanter
+          @wish.item.owner_id.should_not == @wanter.id
+        end
+        
+        it "should not connect to another item when is still connected to original one" do
+          another_user = Factory(:user, :email=>Factory.next(:email),
+                                  :name=>Factory.next(:name))
+          another_item = Factory(:item, :owner=>another_user)
+          @wish.connect(another_item).should be_false
+        end
+      end
     end
   end
 end

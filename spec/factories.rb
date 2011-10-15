@@ -5,7 +5,7 @@ end
 Factory.define :item do |i|
   i.description  "this is an item"
   i.img_link     "http://www.example.com/photos/some_pic.jpg"
-  i.association  :category
+  i.association  :owner
   i.onshelf       true
   i.category_id   1
 end
