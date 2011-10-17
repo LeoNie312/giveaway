@@ -76,7 +76,8 @@ describe Wish do
         @wish.item_id.should be_nil
         @wish.connect(@item)
         @wish.connected_at.should_not be_nil  
-        @wish.item_id.should_not be_nil      
+        @wish.item_id.should_not be_nil  
+        @wish.should be_connected    
       end
       
       it "should not connect to an item belongs to the same user" do

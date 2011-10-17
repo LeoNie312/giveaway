@@ -21,6 +21,7 @@ class Wish < ActiveRecord::Base
     unless item.owner == wanter || self.item != nil
       self.connected_at = DateTime.now
       self.item_id = item.id
+      self.toggle!(:connected)
       self.save
     end
   end

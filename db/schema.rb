@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111015041954) do
+ActiveRecord::Schema.define(:version => 20111017040514) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20111015041954) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "connected_at"
+    t.boolean  "connected",    :default => false
   end
 
   add_index "wishes", ["category_id"], :name => "index_wishes_on_category_id"
