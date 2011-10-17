@@ -1,11 +1,15 @@
 Giveaway::Application.routes.draw do
 
+  resources :sessions, :only => [:new, :create, :destroy]
+
   resources :users
   
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
   
   match '/signup', :to => 'users#new'
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
 
   root :to => "pages#home"
   

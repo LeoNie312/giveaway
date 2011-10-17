@@ -2,6 +2,13 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :hp, :password, :password_confirmation
   
+  has_many :wishes, :foreign_key => 'wanter_id',
+                    :dependent => :destroy
+  
+  has_many :items, :foreign_key => 'owner_id',
+                   :dependent => :destroy
+  
+  
   ntu_email_regex = /\A[\w+\-.]+@(e\.)?ntu\.edu\.sg/i
   hp_regex = /\A\d{8}\z/
   
@@ -15,7 +22,6 @@ class User < ActiveRecord::Base
                     
   validates :hp, :presence => true,
                  :format   => { :with => hp_regex }
-
   
   validates :password, :presence     => true,
                        :confirmation => true,
@@ -41,6 +47,11 @@ class User < ActiveRecord::Base
     return user if user.has_password?(submitted_password)
   end
   
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && user.salt == cookie_salt) ? user : nil
+  end
+
   private
     def encrypt_password
       self.salt = make_salt if new_record?
@@ -58,10 +69,6 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
-
-                 
-
-
 end
 
 
