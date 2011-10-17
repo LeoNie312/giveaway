@@ -2,12 +2,12 @@
 <div id="main">
 	<ul id="homeButton">	
 		<li><%= link_to "What's this?", about_path, :class=>"button round" %></li>
-		<li><%= link_to "Sign Up", "#", :id=>"signup", :class=>"button round" %></li>
+		<li><%= link_to "Sign Up", signup_path, :id=>"signup", :class=>"button round" %></li>
 		<li><%= link_to "Browse", "#", :class=>"button round" %></li>
 	</ul>
 	
 	<p>
 		Already a user? 
-		<%= link_to "Signin", "#", :id=>"signin", :class=>"round" %>
+		<%= link_to "Signin", signin_path, :id=>"signin", :class=>"round" %>
 	</p>	
 </div>	

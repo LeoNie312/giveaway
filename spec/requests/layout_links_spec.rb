@@ -20,6 +20,11 @@ describe "static pages" do
       response.should have_selector('title',:content=> @base_title+'Contact')
   end
   
+  it "should get to signup page at '/signup'" do
+    get '/signup'
+    response.should have_selector('title', :content => @base_title + 'Sign up')
+  end
+  
   describe "when not signed-in" do 
     before :each do
       visit root_path
@@ -54,6 +59,27 @@ describe "static pages" do
       click_link "Contact us"
       response.should have_selector('title',:content=>"Contact")      
     end
+  end
+
+  describe "when signed in" do
+    before(:each) do
+      @user = Factory(:user)
+      visit signin_path
+      fill_in :session_email, :with => @user.email
+      fill_in :session_password, :with => @user.password
+      click_button
+    end
+    
+    it "should have a signout link" do
+      visit root_path
+      response.should have_selector("a", :href => signout_path, :content => "Sign out")
+    end
+    
+    it "should have a personal homepage link" do
+      visit root_path
+      response.should have_selector("a", :href => user_path(@user), :content => "My Homepage")
+    end
+
   end
 
 end
