@@ -58,6 +58,41 @@ describe Category do
     # end
   end
   
+  describe "connection association" do
+    
+    before :each do
+      @child_cate1 = Category.create(:name=>"drink")
+      @child_cate2 = Category.create(:name=>"stationery")
+      @connection1 = Factory(:connection, :parent_id=>@category.id, :child_id=>@child_cate1.id)
+      @connection2 = Factory(:connection, :parent_id=>@category.id, :child_id=>@child_cate2.id)
+    end
+    
+    it "should have a connection method" do
+      @category.should respond_to(:connections)
+    end
+    
+    it "should have a children method" do
+      @category.should respond_to(:children)
+    end
+    
+    it "should have the right children" do
+      @category.children.should == [@child_cate1, @child_cate2]
+    end
+    
+    it "should have a parent method" do
+      @child_cate1.should respond_to(:parent)
+    end
+    
+    it "should have the right parent" do
+      @child_cate1.parent.should == @category
+      @child_cate1.parent.id.should == @category.id
+    end
+    
+    it "should return nil for parent that doesn't exist (base case)" do
+      @category.parent.should be_nil
+    end
+  end
+  
 end
 
 # == Schema Information

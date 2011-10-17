@@ -8,6 +8,15 @@ class Category < ActiveRecord::Base
   # state, and is only visible to that item's owner
   has_many :wishes, :order => "wishes.created_at DESC",
                     :conditions => '(wishes.item_id IS NULL)'
+                  
+  has_many :connections, :foreign_key => 'parent_id'
+  
+  has_many :children, :through => :connections
+  
+  has_one :reverse_connection, :class_name => 'Connection',
+                              :foreign_key => 'child_id'
+                              
+  has_one :parent, :through => :reverse_connection
 end
 
 # == Schema Information
