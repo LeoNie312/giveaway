@@ -1,5 +1,9 @@
 Giveaway::Application.routes.draw do
+
   resources :users
+  
+  resources :categories, :only => [:show]
+  # match "/categories/:id", :to => "categories#show"
   
   match '/signup', :to => 'users#new'
 
