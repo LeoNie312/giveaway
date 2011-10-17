@@ -15,7 +15,7 @@ class Item < ActiveRecord::Base
   
   belongs_to :owner, :class_name => 'User'
   
-  has_many :wishes
+  has_many :wishes, :order => 'wishes.connected_at DESC'
   
   default_scope :order => 'items.onshelf_at DESC'
   

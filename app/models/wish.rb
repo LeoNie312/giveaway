@@ -11,7 +11,7 @@ class Wish < ActiveRecord::Base
   
   belongs_to :category
   
-  default_scope :order => "wishes.created_at DESC"
+  # default_scope :order => "wishes.created_at DESC"
   
   def connect item
     # if a user accidentally wants an item 

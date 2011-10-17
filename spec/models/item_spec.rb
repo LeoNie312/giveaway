@@ -35,13 +35,24 @@ describe Item do
     
     before :each do
       @item = @owner.items.create(@attr)      
+      another_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
+      other_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
+      category = Factory(:category)
+      @wish1 = Factory(:wish, :wanter=>another_user, :category=>category, 
+                      :item_id => @item.id ,:connected_at=>1.day.ago,
+                      :created_at => 2.days.ago)
+      @wish2 = Factory(:wish, :wanter=>other_user, :category=>category, 
+                      :item_id => @item.id, :connected_at=>1.hour.ago,
+                      :created_at => 3.days.ago)
     end
     
     it "should have a wishes method" do
       @item.should respond_to(:wishes)
     end
     
-    it "should have wishes DESC according to their connection time"
+    it "should have wishes DESC according to their connection time" do
+      @item.wishes.should == [@wish2, @wish1]
+    end
     
     it "should disconnect associated wishes at destroy"
   end

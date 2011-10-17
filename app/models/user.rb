@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
                        
   before_save :encrypt_password
   
-  has_many :wishes, :foreign_key => 'wanter_id',
+  has_many :wishes, :order => "wishes.created_at DESC",
+                    :foreign_key => 'wanter_id',
                     :dependent => :destroy
   
   has_many :items, :foreign_key => 'owner_id',

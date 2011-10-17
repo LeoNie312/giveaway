@@ -29,10 +29,10 @@ describe Category do
   describe "wish association" do
     
     before :each do
-      user1 = Factory(:user)
-      user2 = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
-      @wish1 = Factory(:wish, :category=>@category, :wanter=>user1, :created_at=>1.day.ago)
-      @wish2 = Factory(:wish, :category=>@category, :wanter=>user2, :created_at=>1.hour.ago)
+      @user1 = Factory(:user)
+      @user2 = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
+      @wish1 = Factory(:wish, :category=>@category, :wanter=>@user1, :created_at=>1.day.ago)
+      @wish2 = Factory(:wish, :category=>@category, :wanter=>@user2, :created_at=>1.hour.ago)
     end
     
     it "should have a wishes method" do
@@ -43,10 +43,14 @@ describe Category do
       @category.wishes.should == [@wish2, @wish1]
     end
     
-    # To solve this, I need to find a way that 
-    # when wish is connected, category.wishes method 
-    # should not include that wish
-    it "should not include wish that is connected to a specific item" # do
+    it "should not include wish that is connected to a specific item" do
+      an_item = Factory(:item, :owner=>@user2)
+      @wish1.connect(an_item)
+      @category.wishes.should_not include(@wish1)
+      @category.wishes.should include(@wish2)
+    end
+    
+    # do
     #   an_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
     #   item = Factory(:item, :owner=>an_user)
     #   @wish1.connect(item)
