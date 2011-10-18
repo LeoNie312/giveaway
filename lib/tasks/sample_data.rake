@@ -5,7 +5,7 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     make_users
-
+    make_items
   end
 end
 
@@ -50,7 +50,7 @@ def make_items
   
   User.all(:limit=>6).each do |user|
     categories.times do |n|
-      user.items.create!(:description => Faker::Lorem.sentence(10),
+      user.items.create!(:description => Faker::Lorem.sentence(5),
                          :img_link => "http://www.example#{user.id}.com/sample#{n}.jpg",
                          :category_id => n+2)
     end

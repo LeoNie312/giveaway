@@ -1,15 +1,16 @@
 <tr class="item round">
 	<td class="gravatar">
-		<%= link_to gravatar_for(item.owner), item.owner %>
+		<%= link_to gravatar_for(onshelf_item.owner), onshelf_item.owner %>
+		<span class="owner-name"><%= link_to onshelf_item.owner.name, onshelf_item.owner %></span>
 	</td>
-	<td class="description">	
-		<span class="category-tag"></span>
-		<span class="item-description"></span>
-		<span class="img-link"></span>
-		<span class="item-extra-info"></span>
+	<td class="item-info">	
+		<span class="category-tag"><%= onshelf_item.category.name.capitalize %></span>
+		<span class="item-description"><%= onshelf_item.description %></span>
+		<span class="img-link"><%= onshelf_item.img_link %></span>
+		<span class="item-extra-info"><%= time_ago_in_words(onshelf_item.onshelf_at) %> ago at <strong>somewhere</strong></span>
 	</td>
 	<td class="item-interaction">	
-		<span class="item-request"></span>
-		<span class="hp"></span>
+		<span class="item-request"><%= link_to "I want", "#" %></span>
+		<span class="hp"><%= onshelf_item.owner.hp %></span>
 	</td>	
 </tr>	
