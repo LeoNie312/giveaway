@@ -1,2 +1,21 @@
-<h1>Category No. <%= @category.id%></h1>
-<h1>Category Name: <%= @category.name%></h1>
+
+<div class="main">
+<h1><%= @category.name.capitalize%></h1>
+
+<% unless @items.empty? %>
+<div class="items_list">
+	
+</div>	
+<% else %>
+<div class="non-record">
+	<p>There are no record found.</p>
+	<p>You may want to browse other categories on the left, or</p>
+	<p><%= link_to "search for it", "#" %></p>
+</div>	
+<% end %>
+
+</div>
+
+<dive class="sidebar" id="categories">
+	
+</dive>	
