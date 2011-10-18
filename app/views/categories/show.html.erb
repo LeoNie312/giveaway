@@ -3,9 +3,9 @@
 <h1><%= @category.name.capitalize%></h1>
 
 <% unless @items.empty? %>
-<div class="items_list">
-	
-</div>	
+<table class="items_list" summary="all items list">
+	<%= render :partial => 'shared/onshelf_item' ,:collection => @items %>
+</table>	
 <% else %>
 <div class="non-record">
 	<p>There are no record found.</p>

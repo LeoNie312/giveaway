@@ -7,6 +7,8 @@ Giveaway::Application.routes.draw do
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
   
+  resources :items, :only => [:create, :update, :destroy]
+  
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
