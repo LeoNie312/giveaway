@@ -2,13 +2,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
   attr_accessible :name, :email, :hp, :password, :password_confirmation
   
-  has_many :wishes, :foreign_key => 'wanter_id',
-                    :dependent => :destroy
-  
-  has_many :items, :foreign_key => 'owner_id',
-                   :dependent => :destroy
-  
-  
   ntu_email_regex = /\A[\w+\-.]+@(e\.)?ntu\.edu\.sg/i
   hp_regex = /\A\d{8}\z/
   
