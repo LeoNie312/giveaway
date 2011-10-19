@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
     # @current_category = @category
     # @current_items = @current_category.items
     # @items.concat @current_items unless @current_items.empty?
-    @items = bfs(@category) # method in CategoriesHelper
+    bfs(@category) # method in CategoriesHelper
   end
 
 end

@@ -3,8 +3,6 @@ module CategoriesHelper
   private
   
     def bfs(parent)
-
-      # @items = []
       
       unless parent.parent.nil?
         items = parent.items 
@@ -28,7 +26,6 @@ module CategoriesHelper
         end
         q.shift
       end
-      
-      @items
+    
     end
 end

@@ -50,6 +50,20 @@ describe CategoriesController do
       @item2 = Factory(:item, :category_id => @soft_drink.id,
                       :owner => @user)
       
+      @milk = Factory(:category, :name => "milk")
+      @connection3 = Factory(:connection, :parent_id => @drink.id,
+                      :child_id => @milk.id)
+      
+      @item3 = Factory(:item, :category_id => @milk.id,
+                      :owner => @user)
+                      
+      @stationery = Factory(:category, :name => "stationery")
+      @connection3 = Factory(:connection, :parent_id => @base.id,
+                      :child_id => @stationery.id)
+
+      @item4 = Factory(:item, :category_id => @stationery.id,
+                      :owner => @user)
+                      
       get :show, :id => @base
       response.should have_selector("span",
                       :class=> "category-tag",
@@ -58,6 +72,14 @@ describe CategoriesController do
       response.should have_selector("span",
                       :class=> "category-tag",
                       :content => @soft_drink.name.capitalize)
+                      
+      response.should have_selector("span",
+                      :class=> "category-tag",
+                      :content => @milk.name.capitalize)
+                      
+      response.should have_selector("span",
+                      :class=> "category-tag",
+                      :content => @stationery.name.capitalize)
     end
     
     it "should never include base category's items" do
