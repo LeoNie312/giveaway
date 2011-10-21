@@ -54,7 +54,16 @@ describe Item do
       @item.wishes.should == [@wish2, @wish1]
     end
     
-    it "should disconnect associated wishes at destroy"
+    it "should disconnect associated wishes at destroy" do 
+      @item.destroy
+      [@wish1, @wish2].each do |wish|
+        Wish.find_by_id(wish.id).should_not be_nil 
+        db_wish = Wish.find_by_id(wish.id)
+        db_wish.item_id.should be_nil
+        db_wish.connected_at.should be_nil
+        db_wish.connected.should be_false
+      end
+    end
   end
   
   describe "owner association" do

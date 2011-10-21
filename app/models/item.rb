@@ -3,6 +3,8 @@ class Item < ActiveRecord::Base
   
   before_save :calculate_onshelf_time
   
+  before_destroy :disconnect_wishes
+  
   link_regex = /^http:\/\/(www.)?[\w+\-]+\.com\//i
   
   validates :description, :length => { :maximum => 100}
@@ -28,6 +30,12 @@ class Item < ActiveRecord::Base
       # the item, then record
       if new_record? || self.onshelf
         self.onshelf_at = DateTime.now
+      end
+    end
+    
+    def disconnect_wishes
+      wishes.each do |wish|
+        wish.disconnect!
       end
     end
 end
