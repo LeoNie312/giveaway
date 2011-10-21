@@ -2,15 +2,16 @@ module CategoriesHelper
   
   private
   
-    def bfs(parent)
+    def find_items_under(root)
       
-      unless parent.parent.nil?
-        items = parent.items 
-        @items.concat(items)
+      items = []
+      
+      unless root.parent.nil?
+        items.concat root.items 
       end
       
       q = []
-      q.push parent
+      q.push root
       
       until q.empty?
         parent = q.first
@@ -18,14 +19,14 @@ module CategoriesHelper
         child = begin children.next rescue nil end
         
         until child.nil?
-          items = child.items
-          @items.concat(items)
+          items.concat child.items
           
           q.push child
           child = begin children.next rescue nil end
         end
         q.shift
       end
-    
+      
+      items
     end
 end
