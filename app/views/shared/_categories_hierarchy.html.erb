@@ -1,20 +1,21 @@
-<ul id="base">
-<% hierarchy.each do |child, sub_h|%>
-	<li><%= link_to child.capitalize, child %>
-		
-		<% ul_block = Proc.new do |child| %>
-			<% while sub_h %>
-			<ul id="<%= child %>">
-				<% sub_h.each do |grandchild, sub_h|%>
-				<li><%= link_to grandchild.capitalize, grandchild %>
-					<%= ul_block.call(grandchild) %>
-				</li>	
-				<% end %>
-			</ul>	
-			<% end %>
+<% ul_block = Proc.new do |sub_h| %>
+	<ul>
+		<% sub_h.each do |grandchild, subsub|%>
+			<li id="<%= grandchild.name %>"><%= link_to grandchild.name.capitalize, grandchild %>
+				<%= ul_block.call(subsub) if subsub %>
+			</li>	
 		<% end %>
+	</ul>	
+<% end %>
+
+
+
+<ul>
+<% hierarchy.each do |child, sub_h| %>
+	<li id="<%= child.name %>"><%= link_to child.name.capitalize, child %>
 		
-		<%= ul_block.call(child) %>		
+		<!-- <%= ul_block.call(sub_h) if sub_h %>		 -->
+		
 	</li>	
 <% end %>	
 </ul>

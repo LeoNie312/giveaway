@@ -106,16 +106,16 @@ describe CategoriesController do
       
       it "should have a nested categories structure" do
         get :show, :id => @base
-        response.should have_selector('ul', id: "#{@base}")
-        response.should have_selector('ul>ul', id: "#{@drink}")
-        response.should have_selector('ul>ul>ul', id: "#{@soft_drink}")
+        response.should have_selector('ul li', id: "#{@drink.name}")
+        response.should have_selector('ul li ul li', id: "#{@soft_drink.name}")
+        response.should have_selector('ul li ul li ul li', id: "#{@coke.name}")        
       end
       
       it "should get the same result by different :id" do
         get :show, :id => @drink
-        response.should have_selector('ul', id: "#{@base}")
-        response.should have_selector('ul>ul', id: "#{@drink}")
-        response.should have_selector('ul>ul>ul', id: "#{@soft_drink}")
+        response.should have_selector('ul li', id: "#{@drink.name}")
+        response.should have_selector('ul li ul li', id: "#{@soft_drink.name}")
+        response.should have_selector('ul li ul li ul li', id: "#{@coke.name}")        
       end
     end
   end
