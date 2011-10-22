@@ -91,6 +91,33 @@ describe CategoriesController do
                       :class=>"category-tag",
                       :content => @base.name.capitalize)
     end
+    
+    describe "categories sidebar" do
+      
+      before :each do
+        @soft_drink = Factory(:category, :name => "soft drink")
+        @connection2 = Factory(:connection, :parent_id => @drink.id,
+                        :child_id => @soft_drink.id)
+        @coke = Factory(:category, :name => "coke")
+        @connection3 = Factory(:connection, :parent_id => @soft_drink.id,
+                        :child_id => @coke.id) 
+        
+      end
+      
+      it "should have a nested categories structure" do
+        get :show, :id => @base
+        response.should have_selector('ul', id: "#{@base}")
+        response.should have_selector('ul>ul', id: "#{@drink}")
+        response.should have_selector('ul>ul>ul', id: "#{@soft_drink}")
+      end
+      
+      it "should get the same result by different :id" do
+        get :show, :id => @drink
+        response.should have_selector('ul', id: "#{@base}")
+        response.should have_selector('ul>ul', id: "#{@drink}")
+        response.should have_selector('ul>ul>ul', id: "#{@soft_drink}")
+      end
+    end
   end
 
 end
