@@ -5,6 +5,7 @@
 
 body{
 	background: #ccc;
+	-moz-opacity: .999;
 }
 
 .container{

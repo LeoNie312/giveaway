@@ -10,7 +10,7 @@
 
 
 
-<ul>
+<ul class="categories"> <!-- important class that modifies categories sidebar -->
 <% hierarchy.each do |child, sub_h| %>
 	<li id="<%= child.name %>"><%= link_to child.name.capitalize, child %>
 		

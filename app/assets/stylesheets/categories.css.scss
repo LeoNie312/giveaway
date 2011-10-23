@@ -24,5 +24,20 @@ div.non-record{
 .sidebar{
 	float: left;
 	width: 80px;
-	border: 1px solid black;
+}
+
+.categories {
+	
+	a {
+		text-decoration: none;
+		display: block;
+		padding: 5px 7px 4px 17px;
+		color: #CCC;
+		width: 9em;
+		font-weight: bold;
+		background-color: #4C5353;
+		border-bottom: 1px solid #CCC;
+		border-left: 1px solid #CCC;
+	  	margin: 0;
+	}
 }

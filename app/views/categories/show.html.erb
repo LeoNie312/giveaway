@@ -1,6 +1,11 @@
 
-<div class="main">
 <h1><%= @category.name.capitalize%></h1>
+
+<div class="sidebar" id="categories">
+	<%= render 'shared/categories_hierarchy', hierarchy: categories_hierarchy %>
+</div>
+
+<div class="main">
 
 <% unless @items.empty? %>
 <table class="items_list" summary="all items list">
@@ -15,7 +20,3 @@
 <% end %>
 
 </div>
-
-<div class="sidebar" id="categories">
-	<%= render 'shared/categories_hierarchy', hierarchy: categories_hierarchy %>
-</div>	
