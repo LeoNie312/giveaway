@@ -10,14 +10,64 @@ table.items_list{
 
 	tr.item{
 	
+		a {
+			text-decoration: none;
+			
+			&:hover {
+				text-decoration: underline;
+				color: #3b7fcc;
+			}
+		}
 		
+		td span.owner-name {
+			font-size: 80%;
+		}
+		
+		td span.category-tag {
+			border: 1px solid #333;
+			color: #ccc;
+			background: #701d09;
+			display: inline-block;
+			padding: 5px;
+		}
+		
+		td.item-info {
+			width: 460px;
+		}
+		
+		td.item-info .item-extra-info {
+			font-size: 70%;
+		}
+		
+		td.item-interaction {
+			width: 80px;
+		}
+		
+		td.item-interaction .item-request {
+			display: inline-block;
+			padding: 5px;
+			color: #ccc;
+			border: 2px dotted #fc9d1c;
+			cursor: pointer;
+		}
 	
 		td.item-interaction .hp{
-		display: none;
+			display: none;
+			font-size: 70%;
+		}
+		
+		td.item-interaction a:hover{
+			text-decoration: none;
+			color: #631a04;
 		}
 	
 	}
 
+}
+
+/* when mouse hover "i want" button, change the background*/
+.item-request-background {
+	background: #cc923b;
 }
 
 div.non-record{
