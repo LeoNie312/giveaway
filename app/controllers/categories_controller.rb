@@ -10,13 +10,15 @@ class CategoriesController < ApplicationController
       return
     end
     
-    @title = @category.name.capitalize
+    unless @category.name == "base"
+      @title = @category.name.capitalize
+    else
+      @title = "All items"
+    end
     
-    # @current_category = @category
-    # @current_items = @current_category.items
-    # @items.concat @current_items unless @current_items.empty?
     @items = find_items_under(@category) # method in CategoriesHelper
     
+    # for categories sidebar
     base = Category.find_by_name("base")
     @hierarchy = find_categories_under(base) # private method in application_controller 
   end

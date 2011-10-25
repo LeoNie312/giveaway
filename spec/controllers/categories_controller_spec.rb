@@ -27,8 +27,13 @@ describe CategoriesController do
     end
     
     it "should have the right title" do
+      get :show, :id => @drink
+      response.should have_selector("title", :content => @drink.name.capitalize)
+    end
+    
+    it "should replace base's name with something else" do
       get :show, :id => @base
-      response.should have_selector("title", :content => @base.name.capitalize)
+      response.should have_selector('h1', content: "All items")
     end
     
     it "should be the right category" do
