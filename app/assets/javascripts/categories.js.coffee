@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $(document).ready ->
-	$('.categories').superfish({
+	$('ul.sf-menu').superfish({
+		animation: {height:'show'},
 		delay: 400
 	})

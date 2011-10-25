@@ -1,6 +1,8 @@
 /*
 *= require_self
 *= require_directory .
+*= require ./superfish/superfish.css
+*= require ./superfish/superfish-vertical.css
 */
 
 body{
@@ -9,7 +11,7 @@ body{
 }
 
 .container{
-	width: 750px;
+	width: 850px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 25px;
