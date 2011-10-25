@@ -4,6 +4,12 @@ class CategoriesController < ApplicationController
   
   def show
     @category = Category.find_by_id(params[:id])
+    
+    if @category.nil?
+      redirect_to error_url
+      return
+    end
+    
     @title = @category.name.capitalize
     
     # @current_category = @category

@@ -19,6 +19,8 @@ Giveaway::Application.routes.draw do
   
   match '/contact' => "pages#contact"
   
+  get 'error' => "pages#error"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

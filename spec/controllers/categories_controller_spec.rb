@@ -21,8 +21,9 @@ describe CategoriesController do
       response.should be_success
     end
     
-    it "should not have the non-record message" do
-      response.should_not have_selector("div", :class=>"non-record")
+    it "should redirect to error page when categories not found" do
+      get :show, :id => 1000
+      response.should redirect_to(error_path)
     end
     
     it "should have the right title" do
