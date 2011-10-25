@@ -8,31 +8,4 @@ module ApplicationHelper
     end
   end
   
-  def categories_hierarchy
-        
-    base = Category.find_by_name("base")
-    
-    hierarchy = find_categories_under(base)
-    
-  end
-  
-  private
-  
-    # return structure hash or false, 
-    # under that root
-    def find_categories_under(root)
-      
-      if root.children.empty?
-        false    
-      else
-        structure = {}
-        
-        root.children.each do |child|
-          structure[child] = find_categories_under(child)
-        end
-        
-        structure
-      end
-
-    end
 end

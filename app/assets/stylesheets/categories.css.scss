@@ -39,5 +39,41 @@ div.non-record{
 		border-bottom: 1px solid #CCC;
 		border-left: 1px solid #CCC;
 	  	margin: 0;
+	
+		&:hover {
+			background-color: #333;
+			color: #FFF;
+		}
 	}
+	
+	li {
+		list-style: none;
+	}
+	
+/*	ul {
+		margin: 0;
+		padding: 0;
+		position: absolute;
+	    left: 0;
+	    top: 1.72em; 
+		display: none;
+		
+		li {
+			float: none;
+		}
+		
+		ul {
+			position: absolute;
+		    left: 10.8em; 
+		    top: -1px;
+		    z-index: 99;
+		    border-top: 1px solid #FFF;
+			border-right: 1px solid #FFF;
+			
+			li {
+				z-index: 100;
+			}
+		}
+	}*/
+	
 }

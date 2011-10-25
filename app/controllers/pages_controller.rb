@@ -10,5 +10,9 @@ class PagesController < ApplicationController
   def contact
     @title = "Contact"
   end
+  
+  def error
+    @title = "Page Not Found"
+  end
 
 end

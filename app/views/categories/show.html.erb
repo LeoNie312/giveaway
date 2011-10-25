@@ -2,7 +2,7 @@
 <h1><%= @category.name.capitalize%></h1>
 
 <div class="sidebar" id="categories">
-	<%= render 'shared/categories_hierarchy', hierarchy: categories_hierarchy %>
+	<%= render 'shared/categories_hierarchy', hierarchy: @hierarchy %>
 </div>
 
 <div class="main">
