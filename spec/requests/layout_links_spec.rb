@@ -25,6 +25,11 @@ describe "static pages" do
     response.should have_selector('title', :content => @base_title + 'Sign up')
   end
   
+  it "should get to error page at '/error'" do
+    get '/error'
+    response.should have_selector('title', content: @base_title + 'Page Not Found')
+  end
+  
   describe "when not signed-in" do 
     before :each do
       visit root_path

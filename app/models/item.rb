@@ -28,7 +28,7 @@ class Item < ActiveRecord::Base
       # or if not, but onshelf is set to true, 
       # that means the owner decided to re-onshelf
       # the item, then record
-      if new_record? || self.onshelf
+      if new_record? || self.onshelf?
         self.onshelf_at = DateTime.now
       end
     end

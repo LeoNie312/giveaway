@@ -108,6 +108,13 @@ describe Wish do
           @wish.connect(another_item).should be_false
         end
         
+        it "should be able to disconnect from the item" do
+          @wish.disconnect!
+          @wish.item_id.should be_nil
+          @wish.connected_at.should be_nil
+          @wish.should_not be_connected
+        end
+        
         it "should disconnect from the item when it timed-out or wish denied"
       end
 

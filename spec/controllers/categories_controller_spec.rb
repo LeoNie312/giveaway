@@ -89,6 +89,12 @@ describe CategoriesController do
     end
     
     it "should never include base category's items" do
+      unexpected = Factory(:item, category_id: @base.id,
+                      owner: @user)
+      response.should_not have_selector("span",
+                      :class => "category-tag",
+                      :content => @base.name.capitalize)
+    end
     
     describe "categories sidebar" do
       

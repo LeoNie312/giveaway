@@ -29,4 +29,10 @@ describe PagesController do
     end
   end
 
+  describe "GET 'error'" do
+    it "should be successful" do
+      get 'error'
+      response.should be_success
+    end
+  end
 end
