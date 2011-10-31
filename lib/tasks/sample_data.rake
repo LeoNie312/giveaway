@@ -6,6 +6,7 @@ namespace :db do
     Rake::Task['db:reset'].invoke
     make_users
     make_items
+    make_wishes
   end
 end
 
@@ -55,6 +56,17 @@ def make_items
                          :category_id => n+2)
     end
   end  
+end
+
+def make_wishes
+  item = Item.first
+  wishers = User.where('id != ?', item.owner).limit(5)
+  
+  wishers.each do |wisher|
+    wish = wisher.wishes.create(:category_id => item.category.id)
+    result = wish.connect(item)
+    raise Exception unless result
+  end
 end
 
 
