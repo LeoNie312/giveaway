@@ -10,7 +10,9 @@
 		<span class="item-extra-info"><%= time_ago_in_words(onshelf_item.onshelf_at) %> ago at <strong>somewhere</strong></span>
 	</td>
 	<td class="item-interaction">	
+		<% unless onshelf_item.owner == current_user %>
 		<span class="item-request"><%= link_to "I want", "#" %></span>
 		<span class="hp"><%= onshelf_item.owner.hp %></span>
+		<% end %>
 	</td>	
 </tr>	

@@ -32,3 +32,15 @@ jQuery ->
 			( ->
 				$(this).removeClass('item-request-background')				
 			)
+			
+	# $('.item-info .category-tag').each ->
+	# 	$(this).click -> 
+	# 		status=$(this).find('a').attr('href')
+	# 		
+	# 	$(this).css('cursor','pointer')
+	
+	
+	
+	
+	
+	
