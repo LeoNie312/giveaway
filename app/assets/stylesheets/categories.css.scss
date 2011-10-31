@@ -23,6 +23,7 @@ table.items_list{
 			font-size: 80%;
 		}
 		
+		/* moved to a more general rule in application.css.scss 
 		td span.category-tag {
 			border: 1px solid #333;
 			color: #ccc;
@@ -31,12 +32,13 @@ table.items_list{
 			padding: 5px;
 		}
 		
-		td.item-info {
-			width: 460px;
-		}
-		
 		td.item-info .item-extra-info {
 			font-size: 70%;
+		}
+		*/
+		
+		td.item-info {
+			width: 460px;
 		}
 		
 		td.item-interaction {

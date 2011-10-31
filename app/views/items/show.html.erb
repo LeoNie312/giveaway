@@ -3,10 +3,10 @@
 	<span><%= link_to gravatar_for(@item.owner), @item.owner %></span>
 	<span><%= link_to @item.owner.name, @item.owner %>
 </div>	
-<div class="item-specs">
+<div id="item-specs">
 <%= render @item %>
 
-<div class="item-wishes">
+<div id="item-wishes">
 	<%= render @item.wishes %>
 </div>	
 </div>
