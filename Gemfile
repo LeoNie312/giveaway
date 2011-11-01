@@ -6,6 +6,7 @@ gem 'gravatar_image_tag'
 gem 'will_paginate', '~> 3.0.2'
 gem 'jquery-rails'
 gem 'rack', '1.3.3'
+gem 'multi_json'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
