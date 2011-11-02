@@ -121,3 +121,18 @@ describe Wish do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: wishes
+#
+#  id           :integer         not null, primary key
+#  wanter_id    :integer
+#  category_id  :integer
+#  item_id      :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#  connected_at :datetime
+#  connected    :boolean         default(FALSE)
+#
+
