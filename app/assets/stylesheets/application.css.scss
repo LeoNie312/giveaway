@@ -31,6 +31,12 @@ section {
 
 div#main {
 	padding-top: 20px;
+	margin-left: 170px;
+}
+
+div#sidebar{
+	float: left;
+	width: 140px;
 }
 
 .round {
@@ -64,46 +70,12 @@ nav ul li a {
 footer {
 	text-align: center;
 	font-size: 50%;
-}
-
-/*This part is for non-signed-in Homepage*/
-ul#homeButton {
-	padding-bottom: 20px;
-	text-align: center;
-}
-
-ul#homeButton li {
-	list-style-type: none;
-	display: inline-block;
-/*	margin: 0px, 10px;*/
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-a.button#signup {
-	font-size: 250%;
-}
-
-a.button {
-	text-decoration: none;
-	background: #fc9d1c;
-	padding: 20px;
-	font-size: 150%;
+	clear: both;
 }
 
 
-a.button:link {
-}
 
-a.button:visited {
-
-}
-
-a.button:hover {
-
-}
-
-div#locations {
+/*div#locations {
 	border: medium solid #fc9d1c;
 	padding-right: 20px;
 	padding-left: 20px;
@@ -116,7 +88,7 @@ div#locations {
 div#locations h1 {
 	color: #dc3030;
 	text-align: center;
-}
+}*/
 
 div.field, div.actions {
 	margin-bottom: 10px;

@@ -1,0 +1,81 @@
+/*This part is for non-signed-in Homepage*/
+ul#homeButton {
+	padding-bottom: 20px;
+	text-align: center;
+}
+
+ul#homeButton li {
+	list-style-type: none;
+	display: inline-block;
+/*	margin: 0px, 10px;*/
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+a.button#signup {
+	font-size: 250%;
+}
+
+a.button {
+	text-decoration: none;
+	background: #fc9d1c;
+	padding: 20px;
+	font-size: 150%;
+}
+
+
+a.button:link {
+}
+
+a.button:visited {
+
+}
+
+a.button:hover {
+
+}
+
+
+/* This part is for signed-in homepage*/
+div#homepage-heading h1 {
+	text-align: center;
+}
+
+div#sidebar.locations {
+	
+	border: medium solid #fc9d1c;
+	padding: 5px;
+	
+	form input[type=submit] {
+		border: 2px dotted #333;
+		cursor: pointer;
+		font-size: 150%;
+		width: 137px;
+	}
+	
+	span#current-location {
+		font-size: 80%;
+		text-align: center;
+		color: #fc9d1c;
+	}
+	
+	span#checkin-time {
+		font-size: 40%;
+	}
+}
+
+.location-mouseover {
+	background: #73756d; 
+}
+
+.location-chosen {
+	background: #9c0b31;
+}
+
+
+
+
+
+
+
+

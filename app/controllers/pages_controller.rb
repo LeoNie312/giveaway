@@ -1,6 +1,10 @@
 class PagesController < ApplicationController
   def home
     @title = "Home"
+    
+    if signed_in?
+      @locations = Location.all
+    end
   end
 
   def about

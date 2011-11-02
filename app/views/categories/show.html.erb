@@ -1,14 +1,16 @@
+<div id="categories-heading">
 <% if @category.name == "base"%>
 <h1>All items</h1>
 <% else%>
 <h1><%= @category.name.capitalize%></h1>
 <% end %>
+</div>
 
-<div class="sidebar">
+<div id="sidebar">
 	<%= render 'shared/categories_hierarchy', hierarchy: @hierarchy %>
 </div>
 
-<div class="main">
+<div id="main">
 
 <% unless @items.empty? %>
 <table class="items_list" summary="all items list">

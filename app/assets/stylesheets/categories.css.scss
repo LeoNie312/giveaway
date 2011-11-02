@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
+div#categories-heading h1 {
 	text-align: center;
 }
 
@@ -75,67 +75,7 @@ table.items_list{
 div.non-record{
 
 }
+	
 
-div.main {
-	margin-left: 170px;
-}
-	
-	
-.sidebar{
-	float: left;
-	width: 80px;
-}
-
-.categories {
-	
-/*	a {
-		text-decoration: none;
-		display: block;
-		padding: 5px 7px 4px 17px;
-		color: #CCC;
-		width: 7em;*/ /* this sets width of every category bar */
-/*		font-weight: bold;
-		background-color: #4C5353;
-		border-bottom: 1px solid #CCC;
-		border-left: 1px solid #CCC;
-	  	margin: 0;
-	
-		&:hover {
-			background-color: #333;
-			color: #FFF;
-		}
-	}
-	
-	li {
-		list-style: none;
-	}*/
-	
-/*	ul {
-		margin: 0;
-		padding: 0;
-		position: absolute;
-	    left: 0;
-	    top: 1.72em; 
-		display: none;
-		
-		li {
-			float: none;
-		}
-		
-		ul {
-			position: absolute;
-		    left: 10.8em; 
-		    top: -1px;
-		    z-index: 99;
-		    border-top: 1px solid #FFF;
-			border-right: 1px solid #FFF;
-			
-			li {
-				z-index: 100;
-			}
-		}
-	}*/
-	
-}
 
 

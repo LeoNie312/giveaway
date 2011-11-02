@@ -232,6 +232,20 @@ describe User do
         @user.location.should == @location
         @user.users_location.location_id.should == @location.id
       end
+      
+      it "should checkin a user" do
+        another_location = Factory(:location, name: "NBS")
+        @userslocation.destroy
+        @user.location.should be_nil
+        
+        @user.checkin(@location)
+        @user.reload
+        @user.location.should == @location
+        
+        @user.checkin(another_location)
+        @user.reload
+        @user.location.should == another_location
+      end
     end
   end
   

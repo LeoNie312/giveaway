@@ -37,6 +37,20 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  def checkin(chosen_location)
+    if new_record?
+      raise "unsaved user instance tried to checkin"
+      return
+    end
+    
+    if self.location.nil?
+      UsersLocation.create(location_id: chosen_location.id,
+                            user_id: self.id)
+    else
+      self.users_location.update_attributes(location_id: chosen_location.id)
+    end
+  end
+  
   def self.authenticate(email, submitted_password)
     user = find_by_email(email)
     return nil if user.nil?

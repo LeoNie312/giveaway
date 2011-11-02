@@ -23,6 +23,15 @@ class UsersController < ApplicationController
     end
   end
   
+  def checkin
+    location = Location.find_by_name(params[:name])
+    current_user.checkin(location)
+    respond_to do |format|
+      format.html {redirect_to root_url}
+      format.js
+    end
+  end
+  
 end
 
 
