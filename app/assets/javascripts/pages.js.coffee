@@ -15,5 +15,3 @@ jQuery ->
 				
 			$(this).addClass('location-chosen')
 			
-			new_location = $(this).attr('value')
-			$('span#current-location').text(new_location)
