@@ -16,6 +16,13 @@ connections.each do |child, parent|
   Connection.create!(:parent_id=>parent, :child_id=>child)
 end
 
+["LWN Library", "Canteen A", "Canteen B",
+  "LKC LT", "TCT LT", "NIE", "Hall 11",
+  "Hall 7", "Hall 1", "SRC"
+  ].each do |location|
+    Location.find_or_create_by_name(location)
+  end
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
