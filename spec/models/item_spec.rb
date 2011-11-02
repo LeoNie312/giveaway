@@ -140,6 +140,7 @@ describe Item do
 
 end
 
+
 # == Schema Information
 #
 # Table name: items
@@ -152,5 +153,6 @@ end
 #  created_at  :datetime
 #  updated_at  :datetime
 #  onshelf_at  :datetime
+#  owner_id    :integer
 #
 

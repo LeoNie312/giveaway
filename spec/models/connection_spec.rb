@@ -37,3 +37,15 @@ describe Connection do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: connections
+#
+#  id         :integer         not null, primary key
+#  parent_id  :integer
+#  child_id   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+

@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
       end
 
     end
+    
+    def authenticate
+      deny_access unless signed_in?
+    end
 end
