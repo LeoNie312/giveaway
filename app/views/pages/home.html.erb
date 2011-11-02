@@ -2,7 +2,7 @@
 <h1>GiveAwaY</h1>
 </div>
 <% unless signed_in? %>
-<div id="main">
+<div id="outsider-main">
 	<ul id="homeButton">	
 		<li><%= link_to "What's this?", about_path, :class=>"button round" %></li>
 		<li><%= link_to "Sign Up", signup_path, :id=>"signup", :class=>"button round" %></li>
