@@ -210,6 +210,29 @@ describe User do
         end
       end
     end
+    
+    describe "with users_location" do
+      
+      before :each do
+        @user = User.create(@attr)
+        @location = Factory(:location, name: "LWN Library")
+        @userslocation = Factory(:users_location, user_id: @user.id,
+                  location_id: @location.id)
+      end
+      
+      it "should have a users_location method" do
+        @user.should respond_to(:users_location)        
+      end
+      
+      it "should have a location method" do
+        @user.should respond_to(:location)
+      end
+      
+      it "should be the correct location" do
+        @user.location.should == @location
+        @user.users_location.location_id.should == @location.id
+      end
+    end
   end
   
   describe "password encryption" do

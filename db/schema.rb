@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102024118) do
+ActiveRecord::Schema.define(:version => 20111102030827) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -62,6 +62,16 @@ ActiveRecord::Schema.define(:version => 20111102024118) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
+  create_table "users_locations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users_locations", ["location_id"], :name => "index_users_locations_on_location_id"
+  add_index "users_locations", ["user_id"], :name => "index_users_locations_on_user_id", :unique => true
 
   create_table "wishes", :force => true do |t|
     t.integer  "wanter_id"

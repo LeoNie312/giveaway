@@ -36,3 +36,11 @@ end
 Factory.define :connection do |c|
   
 end
+
+Factory.define :location do |l|
+  
+end
+
+Factory.define :users_location do |u|
+  
+end

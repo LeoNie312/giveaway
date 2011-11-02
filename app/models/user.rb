@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   has_many :items, :foreign_key => 'owner_id',
                    :dependent => :destroy
   
+  has_one :users_location, :dependent => :destroy
+  
+  has_one :location, :through => :users_location
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
