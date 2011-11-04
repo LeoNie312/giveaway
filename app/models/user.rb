@@ -43,10 +43,11 @@ class User < ActiveRecord::Base
       return
     end
     
-    if self.location.nil?
+    current_location = self.location
+    if current_location.nil?
       UsersLocation.create(location_id: chosen_location.id,
                             user_id: self.id)
-    else
+    elsif current_location != chosen_location # if same location, do nothing
       self.users_location.update_attributes(location_id: chosen_location.id)
     end
   end

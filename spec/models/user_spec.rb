@@ -245,6 +245,12 @@ describe User do
         @user.checkin(another_location)
         @user.reload
         @user.location.should == another_location
+        
+        # checkin the same place for a second time,
+        # the user should still in that location
+        @user.checkin(another_location)
+        @user.reload
+        @user.location.should == another_location
       end
     end
   end
