@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111102030827) do
+ActiveRecord::Schema.define(:version => 20111107042745) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -19,15 +19,15 @@ ActiveRecord::Schema.define(:version => 20111102030827) do
     t.datetime "updated_at"
   end
 
-  create_table "connections", :force => true do |t|
+  create_table "categories_connections", :force => true do |t|
     t.integer  "parent_id"
     t.integer  "child_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "connections", ["child_id"], :name => "index_connections_on_child_id", :unique => true
-  add_index "connections", ["parent_id"], :name => "index_connections_on_parent_id"
+  add_index "categories_connections", ["child_id"], :name => "index_connections_on_child_id", :unique => true
+  add_index "categories_connections", ["parent_id"], :name => "index_connections_on_parent_id"
 
   create_table "items", :force => true do |t|
     t.string   "description"

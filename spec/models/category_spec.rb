@@ -58,17 +58,17 @@ describe Category do
     # end
   end
   
-  describe "connection association" do
+  describe "categories_connection association" do
     
     before :each do
       @child_cate1 = Category.create(:name=>"drink")
       @child_cate2 = Category.create(:name=>"stationery")
-      @connection1 = Factory(:connection, :parent_id=>@category.id, :child_id=>@child_cate1.id)
-      @connection2 = Factory(:connection, :parent_id=>@category.id, :child_id=>@child_cate2.id)
+      @connection1 = Factory(:categories_connection, :parent_id=>@category.id, :child_id=>@child_cate1.id)
+      @connection2 = Factory(:categories_connection, :parent_id=>@category.id, :child_id=>@child_cate2.id)
     end
     
     it "should have a connection method" do
-      @category.should respond_to(:connections)
+      @category.should respond_to(:categories_connections)
     end
     
     it "should have a children method" do

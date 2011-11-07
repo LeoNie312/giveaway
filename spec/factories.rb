@@ -33,7 +33,7 @@ Factory.sequence :name do |n|
   "person-#{n}"
 end
 
-Factory.define :connection do |c|
+Factory.define :categories_connection do |c|
   
 end
 
