@@ -69,10 +69,19 @@ describe WishesController do
         @attr = {category_id: @drink}
       end
       
-      it "should create a wish" do
+      it "should create a wish if there's no previous same wish" do
         lambda do
           post :create, :wish => @attr
         end.should change(Wish, :count).by(1)
+      end
+      
+      it "should not create a wish if there's previous same wish (which hasn't connected to anything yet)" do
+        previous_wish = Factory(:wish, :wanter_id => @user.id, 
+                          :category_id => @drink.id, :item_id => nil)
+                          
+        lambda do
+          post :create, :wish => @attr
+        end.should_not change(Wish, :count)
       end
       
       it "should redirect to category show page" do
