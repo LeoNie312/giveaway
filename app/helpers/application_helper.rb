@@ -11,5 +11,4 @@ module ApplicationHelper
   def base_category
     Category.find_by_name("base")
   end
-  
 end
