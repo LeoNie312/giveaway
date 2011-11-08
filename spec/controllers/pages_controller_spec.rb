@@ -11,7 +11,21 @@ describe PagesController do
         get 'home'
         response.should be_success
       end
+      
+      it "should not display locations sidebar"
     
+    end
+    
+    describe "when signed-in" do
+      
+      before :each do
+        @user = Factory(:user)
+        test_sign_in @user
+      end
+      
+      it "should display locations sidebar"
+      
+      
     end
   end
 

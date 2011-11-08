@@ -181,6 +181,10 @@ describe UsersController do
     end
   end
   
+  describe "POST 'checkin'" do
+    pending
+  end
+  
   describe "authentication of edit/update pages" do
     before(:each) do
       @user = Factory(:user)
