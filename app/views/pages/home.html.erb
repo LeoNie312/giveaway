@@ -1,7 +1,9 @@
 <div id="homepage-heading">
 <h1>GiveAwaY</h1>
 </div>
+
 <% unless signed_in? %>
+
 <div id="outsider-main">
 	<ul id="homeButton">	
 		<li><%= link_to "What's this?", about_path, :class=>"button round" %></li>
@@ -14,30 +16,28 @@
 		<%= link_to "Signin", signin_path, :id=>"signin", :class=>"round" %>
 	</p>	
 </div>	
+
 <% else %>
+
 <div id="sidebar" class="locations round">
 	<span>I'm at...</span>
 	<span id="current-location"><%= current_user.location.name unless current_user.location.nil? %></span><br/>
 	<span id="checkin-time">
-	<% unless current_user.location.nil? %>	
-		<% updated_time = current_user.users_location.updated_at %>
-		<% if (Time.now - updated_time) < 1.minute %>
-		just now
-		<% else %>
-		<%= time_ago_in_words(updated_time) %> ago
+		<% unless current_user.location.nil? %>	
+			<% updated_time = current_user.users_location.updated_at %>
+			<% if (Time.now - updated_time) < 1.minute %>
+			just now
+			<% else %>
+			<%= time_ago_in_words(updated_time) %> ago
+			<% end %>
 		<% end %>
-	<% end %>
 	</span>
 	<%= render :partial => 'shared/location', :collection => @locations %>
 </div>	
 
 <div id="main" class="users-choices">
-	<h1>I have something:</h1>
-	
-	
-	<h1>I want something:</h1>
-	<form></form>
-	
-	<h1>Just Browse</h1>  
+	<h1><%= link_to "I have something:", new_item_path %></h1>
+	<h1><%= link_to "I want something:", new_wish_path %></h1>
+	<h1><%= link_to "Just Browse", base_category %></h1>  
 </div>	
 <% end %>

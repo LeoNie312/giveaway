@@ -1,8 +1,6 @@
 Giveaway::Application.routes.draw do
 
-  get "wishes/create"
-
-  get "wishes/destroy"
+  resources :wishes, :only => [:new, :create, :destroy]
 
   resources :sessions, :only => [:new, :create, :destroy]
 
@@ -11,7 +9,7 @@ Giveaway::Application.routes.draw do
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
   
-  resources :items, :only => [:show, :create, :update, :destroy]
+  resources :items, :only => [:show, :new, :create, :update, :destroy]
   
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
