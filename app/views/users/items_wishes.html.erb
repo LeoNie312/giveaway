@@ -1,0 +1,22 @@
+<h2>
+	<%= gravatar_for @user %>
+	<%= @user.name %>
+</h2>
+
+<div id="user_items_list">
+	<h2>All your items:</h2>
+	<ul>
+	<% @user.items.each do |item| %>
+	<%= render item %>
+	<% end %>
+	</ul>
+</div>
+
+<div id="user_wishes_list">
+	<h2>All your wishes:</h2>
+	<ul>
+	<% @user.wishes.each do |wish| %>
+	<%= render wish.item %>
+	<% end %>
+	</ul>
+</div>

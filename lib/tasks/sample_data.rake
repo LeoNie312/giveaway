@@ -67,6 +67,14 @@ def make_wishes
     result = wish.connect(item)
     raise Exception unless result
   end
+  
+  adam = User.find_by_name("Adam Li")
+  other_items = Item.where("owner_id != ?", adam).limit(5)
+  other_items.each do |item|
+    wish = adam.wishes.create(:category_id => item.category)
+    result = wish.connect(item)
+    raise Exception unless result
+  end
 end
 
 

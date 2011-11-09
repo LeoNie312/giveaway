@@ -17,6 +17,7 @@ Factory.define :user do |u|
 
   u.password "foobar"
   u.password_confirmation "foobar"
+  
 
 end
 

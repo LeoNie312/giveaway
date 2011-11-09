@@ -18,6 +18,7 @@ describe UsersController do
   describe "GET 'show'" do
     before(:each) do
       @user = Factory(:user)
+      test_sign_in(@user)
     end
     
     it "should be successful" do
@@ -122,11 +123,6 @@ describe UsersController do
       response.should have_selector("title", :content => "Edit user")
     end
     
-    it "should find the right user" do
-      get :edit, :id => @user
-      assigns(:user).should == @user
-    end
-    
     it "should have a link to change the Gravatar" do
       get :edit, :id => @user
       gravatar_url = "http://gravatar.com/emails"
@@ -197,5 +193,52 @@ describe UsersController do
         response.should redirect_to(signin_path)
       end
     end
+    
+    describe "for signed-in users" do
+      before(:each) do
+        wrong_user = Factory(:user, :email => "abc@e.ntu.edu.sg", :name => "Steve Jobs")
+        test_sign_in(wrong_user)
+      end
+      
+      it "should require matching users for 'edit'" do
+        get :edit, :id => @user
+        response.should redirect_to(root_path)
+      end
+      
+      it "should require matching users for 'update'" do
+        get :update, :id => @user, :user => {}
+        response.should redirect_to(root_path)
+      end
+      
+    end
+  end
+  
+  describe "GET 'items_wishes' page" do
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+    end
+    
+    it "should be successful" do
+      get :items_wishes, :id => @user
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :items_wishes, :id => @user
+      response.should have_selector("title", :content => "Items & Wishes")
+    end
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+

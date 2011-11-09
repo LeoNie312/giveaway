@@ -15,6 +15,7 @@
 	</p>	
 </div>	
 <% else %>
+
 <div id="sidebar" class="locations round">
 	<span>I'm at...</span>
 	<span id="current-location"><%= current_user.location.name unless current_user.location.nil? %></span><br/>
@@ -32,6 +33,10 @@
 </div>	
 
 <div id="main" class="users-choices">
+	<h2>
+		<%= gravatar_for @user %>
+		<%= @user.name %>
+	</h2>
 	<h1>I have something:</h1>
 	
 	

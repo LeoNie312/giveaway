@@ -1,8 +1,6 @@
 Giveaway::Application.routes.draw do
 
-  get "wishes/create"
-
-  get "wishes/destroy"
+  resources :wishes, :only => [:create, :destroy]
 
   resources :sessions, :only => [:new, :create, :destroy]
 
@@ -23,6 +21,8 @@ Giveaway::Application.routes.draw do
   match '/about' => "pages#about"
   
   match '/contact' => "pages#contact"
+  
+  match '/users/:id/items_wishes', :to => 'users#items_wishes', :as => 'items_wishes'
   
   get 'error' => "pages#error"
   

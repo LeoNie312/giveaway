@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]
+  before_filter :authenticate, :except => [:new, :create]
+  before_filter :correct_user, :except => [:new, :create]
   
   def new
     @user = User.new
@@ -26,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     @title = "Edit user"
   end
   
@@ -49,6 +49,17 @@ class UsersController < ApplicationController
       format.js
     end
   end
+  
+  def items_wishes
+    @user = User.find(params[:id])
+    @title = "Items & Wishes"
+  end
+  
+  private
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)
+    end
   
 end
 

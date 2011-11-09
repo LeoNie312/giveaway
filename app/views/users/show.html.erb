@@ -1,29 +1,28 @@
-<div id="locations" class="round">
-	<h1>Check in</h1>
-	<h3>I'm at...</h3>
-	<ul>		
-		<li><%= link_to "LWN Library", '#' %></li>
-		<li><%= link_to "Canteen A | fastfood", '#' %></li>
-		<li><%= link_to "Canteen A | food court", '#' %></li>
-		<li><%= link_to "Canteen B", '#' %></li>
-		<li><%= link_to "SAC", '#' %></li>
-		<li><%= link_to "Business Library", '#' %></li>
-	</ul>
+<div id="profile">
+	<table>
+	<tr>
+		<h2>
+			<%= gravatar_for @user %>
+			<%= @user.name %>
+		</h2>
+	</tr>
+	<tr>
+		<th>NTU Email:</th>
+		<td><%= @user.email %></td>
+	</tr>
+	<tr>
+		<th>Mobile No.:</th>
+		<td><%= @user.hp %></td>
+	</tr>
+	<tr>
+		<th>Current Location:</th>
+		<td><%= @user.location ? @user.location.name : "nil" %></td>
+	</tr>
+	</table>
+	<%= link_to "Edit My Profile", edit_user_path(current_user) %>
 </div>
 
-<div id="main">
-	<h4>
-		<%= gravatar_for @user %>
-		<%= @user.name %>
-	</h4>
-	
 
-	<h1>I have something:</h1>
-	
-	
-	<h1>I want something:</h1>
-	<form></form>
-	
-	<h1>Just Browse</h1>
-<div id="main">
+
+
 
