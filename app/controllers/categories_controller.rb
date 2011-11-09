@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_filter :authenticate
   
   include CategoriesHelper
   

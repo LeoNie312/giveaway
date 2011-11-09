@@ -4,7 +4,11 @@ Giveaway::Application.routes.draw do
 
   resources :sessions, :only => [:new, :create, :destroy]
 
-  resources :users
+  resources :users do
+    member do
+      post 'checkin', :to => 'users#checkin'
+    end
+  end
   
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
@@ -14,7 +18,7 @@ Giveaway::Application.routes.draw do
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-  post '/checkin', :to => 'users#checkin'
+  match '/checkin', :to => 'users#checkin', :via => :post
 
   root :to => "pages#home"
   

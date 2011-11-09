@@ -12,6 +12,7 @@ describe CategoriesController do
                       :child_id => @drink.id)
                       
       @user = Factory(:user)
+      test_sign_in @user
       @item1 = Factory(:item, :category_id=>@drink.id, 
                         :owner=>@user)                       
     end
@@ -121,6 +122,25 @@ describe CategoriesController do
         response.should have_selector('ul li ul li', id: "#{@soft_drink.name}")
         response.should have_selector('ul li ul li ul li', id: "#{@coke.name}")        
       end
+    end
+  end
+  
+  describe "authentication" do
+    
+    before :each do
+      @base = Factory(:category)
+      @drink = Factory(:category, :name => "drink")
+      @connection1 = Factory(:categories_connection, :parent_id => @base.id,
+                      :child_id => @drink.id)
+                      
+      @user = Factory(:user)
+      @item1 = Factory(:item, :category_id=>@drink.id, 
+                        :owner=>@user)
+    end
+    
+    it "should be redirect to signin path" do
+      get :show, :id => @base
+      response.should redirect_to(signin_path)
     end
   end
 

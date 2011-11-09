@@ -185,19 +185,19 @@ describe UsersController do
     end
     
     it "should should require the user to sign in first" do
-      post :checkin, name: "LWN"
+      post :checkin, id: @user, name: "LWN"
       response.should redirect_to(signin_path)
     end
     
     it "should change the user's location" do
       test_sign_in @user
-      post :checkin, name: @location1.name
+      post :checkin, id: @user, name: @location1.name
       response.should be_redirect
       @user.reload
       @user.location.should == @location1
       
       location2 = Factory(:location, name: "Canteen A")
-      post :checkin, name: location2.name
+      post :checkin, id: @user, name: location2.name
       response.should be_redirect
       @user.reload
       @user.location.should == location2      

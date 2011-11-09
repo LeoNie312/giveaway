@@ -7,9 +7,6 @@ class WishesController < ApplicationController
   end
   
   def create
-    @wish = current_user.wishes.create(params[:wish])
-    @item = Wish.find(params[:wish][:item_id])
-    @wish.connect(@item)
     category = Category.find_by_id(params[:wish][:category_id])
     
     # if there is old same wish exists, which hasn't connected to
@@ -23,10 +20,24 @@ class WishesController < ApplicationController
       flash.now[:error] = "unexpected error"
       render 'new'
     else
-      unless old_wishes_exist?(category)  # private method of this controller
-        @wish = current_user.wishes.build(params[:wish])
-        @wish.save!
+      
+      # if there's old unconnected wish, take that wish out.
+      # and if it is a "I want" request, connect the wish 
+      # with the item. 
+      if (wishes = old_wishes(category)).any?  # private method of this controller
+        @wish = wishes.first
+        
+        if params[:wish][:item_id]
+          @item = Item.find(params[:wish][:item_id]) 
+          @wish.connect(@item)
+        end  
+      
+      # otherwise, create a new wish record directly, 
+      # with or without item_id  
+      else
+        @wish = current_user.wishes.create!(params[:wish])
       end
+      
       redirect_to category
     end
 
@@ -37,10 +48,10 @@ class WishesController < ApplicationController
   
   private
   
-    def old_wishes_exist?(category)
+    def old_wishes(category)
       Wish.where(:category_id => category, 
                  :wanter_id => current_user,
-                 :item_id => nil).any?
+                 :item_id => nil)
     end
 
 end
