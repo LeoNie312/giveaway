@@ -12,6 +12,8 @@ class WishesController < ApplicationController
     
     if category.nil?
       flash[:error] = "unexpected error"
+      base = Category.find_by_name("base")
+      redirect_to base
     else
       
       # unless there are old wishes, create new wish,
@@ -19,8 +21,8 @@ class WishesController < ApplicationController
       unless old_wishes(category).any?
         @wish = current_user.wishes.create!(params[:wish])
       end
+      redirect_to category, :notice => "successfully remembered"
     end
-    redirect_to category, :notice => "successfully remembered"
   end
 
   def destroy
