@@ -6,19 +6,22 @@ Giveaway::Application.routes.draw do
 
   resources :users do
     member do
-      post 'checkin', :to => 'users#checkin'
+      post 'checkin', :to => 'users#checkin'  
     end
   end
   
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
   
-  resources :items, :only => [:show, :new, :create, :update, :destroy]
+  resources :items, :only => [:show, :new, :create, :update, :destroy] do
+    collection do
+      get 'search', :to => 'items#search_items' # search_items_path
+    end
+  end
   
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
-  match '/checkin', :to => 'users#checkin', :via => :post
 
   root :to => "pages#home"
   

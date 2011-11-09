@@ -18,9 +18,16 @@
 </table>	
 <% else %>
 <div class="non-record">
-	<p>There are no record found.</p>
+	<p>There are no record found. 
+		<span id="wish-memo">
+			<%= form_for current_user.wishes.build(category_id: @category.id) do |f| %>
+				<%= f.hidden_field :category_id %>
+				<%= f.submit "Memo my wish", name: nil %>
+			<% end %>
+		</span>
+	</p>
 	<p>You may want to browse other categories on the left, or</p>
-	<p><%= link_to "search for it", "#" %></p>
+	<p><%= link_to "search for it", search_items_path %></p>	
 </div>	
 <% end %>
 
