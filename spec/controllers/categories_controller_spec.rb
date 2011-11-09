@@ -8,7 +8,7 @@ describe CategoriesController do
     before :each do
       @base = Factory(:category)
       @drink = Factory(:category, :name => "drink")
-      @connection1 = Factory(:connection, :parent_id => @base.id,
+      @connection1 = Factory(:categories_connection, :parent_id => @base.id,
                       :child_id => @drink.id)
                       
       @user = Factory(:user)
@@ -51,20 +51,20 @@ describe CategoriesController do
     it "should have children category's items" do
       
       @soft_drink = Factory(:category, :name => "soft drink")
-      @connection2 = Factory(:connection, :parent_id => @drink.id,
+      @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
                       :child_id => @soft_drink.id)
       @item2 = Factory(:item, :category_id => @soft_drink.id,
                       :owner => @user)
       
       @milk = Factory(:category, :name => "milk")
-      @connection3 = Factory(:connection, :parent_id => @drink.id,
+      @connection3 = Factory(:categories_connection, :parent_id => @drink.id,
                       :child_id => @milk.id)
       
       @item3 = Factory(:item, :category_id => @milk.id,
                       :owner => @user)
                       
       @stationery = Factory(:category, :name => "stationery")
-      @connection3 = Factory(:connection, :parent_id => @base.id,
+      @connection3 = Factory(:categories_connection, :parent_id => @base.id,
                       :child_id => @stationery.id)
 
       @item4 = Factory(:item, :category_id => @stationery.id,
@@ -100,10 +100,10 @@ describe CategoriesController do
       
       before :each do
         @soft_drink = Factory(:category, :name => "soft drink")
-        @connection2 = Factory(:connection, :parent_id => @drink.id,
+        @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
                         :child_id => @soft_drink.id)
         @coke = Factory(:category, :name => "coke")
-        @connection3 = Factory(:connection, :parent_id => @soft_drink.id,
+        @connection3 = Factory(:categories_connection, :parent_id => @soft_drink.id,
                         :child_id => @coke.id) 
         
       end

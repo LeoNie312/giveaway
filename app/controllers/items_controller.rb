@@ -1,5 +1,9 @@
 class ItemsController < ApplicationController
   
+  def new
+
+  end
+  
   def show
     @item = Item.find_by_id(params[:id])
     if @item.nil?

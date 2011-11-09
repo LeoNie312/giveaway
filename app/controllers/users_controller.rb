@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_filter :authenticate, :except => [:new, :create]
   before_filter :correct_user, :except => [:new, :create]
+
   
   def new
     @user = User.new

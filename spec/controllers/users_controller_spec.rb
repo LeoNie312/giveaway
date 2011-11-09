@@ -177,6 +177,33 @@ describe UsersController do
     end
   end
   
+  describe "POST 'checkin'" do
+    
+    before(:each) do
+      @user = Factory(:user)
+      @location1 = Factory(:location, name: "LWN")
+    end
+    
+    it "should should require the user to sign in first" do
+      post :checkin, name: "LWN"
+      response.should redirect_to(signin_path)
+    end
+    
+    it "should change the user's location" do
+      test_sign_in @user
+      post :checkin, name: @location1.name
+      response.should be_redirect
+      @user.reload
+      @user.location.should == @location1
+      
+      location2 = Factory(:location, name: "Canteen A")
+      post :checkin, name: location2.name
+      response.should be_redirect
+      @user.reload
+      @user.location.should == location2      
+    end
+  end
+  
   describe "authentication of edit/update pages" do
     before(:each) do
       @user = Factory(:user)

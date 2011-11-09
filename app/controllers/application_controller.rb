@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
     # under that root
     def find_categories_under(root)
       
+      if root.instance_of? String
+        root = Category.find_by_name(root)
+        raise "wrong category name" if root.nil?
+      end
+      
       if root.children.empty?
         false    
       else
