@@ -6,3 +6,15 @@ class UsersLocation < ActiveRecord::Base
   belongs_to :user
   belongs_to :location
 end
+
+# == Schema Information
+#
+# Table name: users_locations
+#
+#  id          :integer         not null, primary key
+#  user_id     :integer
+#  location_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

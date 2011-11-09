@@ -1,6 +1,7 @@
 <div class="item-info">
-	<span class="category-tag"><%= item.category.name.capitalize %></span>
-	<span class="item-description"><%= item.description %></span><br/>
+	
+	<span class="item-description"><%= link_to item.description, item %></span>
+	<span class="category-tag"><%= item.category.name.capitalize %></span><br/>
 	<span class="img-link">img url: <%= link_to item.img_link, item.img_link, target:'_blank' %></span><br/>
 	<span class="item-extra-info"><%= time_ago_in_words(item.onshelf_at) %> ago at 
 		<strong>somewhere</strong></span>
