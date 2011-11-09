@@ -137,17 +137,37 @@ div.field, div.actions {
 
 /* the general design for item specifications */
 .item-info {
+	border-style: solid;
+	border-width: 3px;
+	border-color: #FF4500;
+	padding-left: 10px;
+	padding-top: 10px;
+	margin-bottom: 10px;
 	.category-tag {
 		border: 1px solid #333;
 		color: #ccc;
 		background: #701d09;
 		display: inline-block;
 		padding: 5px;
+		text-align: right;
 	}
 	
 	.item-extra-info {
 		font-size: 70%;
 	}
+	
+	.item-description a:link {
+		color: #00CC00;
+	}
+	
+	.item-description a:hover {
+		color: #6BE400;
+	}
+
+	.item-description a:visited {
+		color: #00A67C;
+	}
+	
 }
 
 

@@ -11,7 +11,12 @@
 	</td>
 	<td class="item-interaction">	
 		<% unless onshelf_item.owner == current_user %>
-		<span class="item-request"><%= link_to "I want", "#" %></span>
+		<span class="item-request">
+			<%= form_for current_user.wishes.build(:item_id => onshelf_item.id) do |f| %>
+			<%= f.hidden_field :item_id %>
+			<%= f.submit "I want" %>
+			<% end %>		
+		</span>
 		<span class="hp"><%= onshelf_item.owner.hp %></span>
 		<% end %>
 	</td>	

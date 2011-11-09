@@ -22,6 +22,8 @@ Giveaway::Application.routes.draw do
   
   match '/contact' => "pages#contact"
   
+  match '/users/:id/items_wishes', :to => 'users#items_wishes', :as => 'items_wishes'
+  
   get 'error' => "pages#error"
   
   # The priority is based upon order of creation:

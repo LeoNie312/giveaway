@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
     if @item.nil?
       redirect_to error_url
     else
-      @title = @item.category.name.capitalize + "item"
+      @title = @item.category.name.capitalize + " item"
     end
   end
   

@@ -82,7 +82,7 @@ describe "static pages" do
     
     it "should have a personal homepage link" do
       visit root_path
-      response.should have_selector("a", :href => user_path(@user), :content => "My Homepage")
+      response.should have_selector("a", :href => root_path, :content => "Homepage")
     end
 
   end

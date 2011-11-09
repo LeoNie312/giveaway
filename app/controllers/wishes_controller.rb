@@ -7,6 +7,9 @@ class WishesController < ApplicationController
   end
   
   def create
+    @wish = current_user.wishes.create(params[:wish])
+    @item = Wish.find(params[:wish][:item_id])
+    @wish.connect(@item)
     category = Category.find_by_id(params[:wish][:category_id])
     
     # if there is old same wish exists, which hasn't connected to
