@@ -15,7 +15,7 @@ class WishesController < ApplicationController
       base = Category.find_by_name("base")
       redirect_to base
     else
-      
+
       # unless there are old wishes, create new wish,
       # otherwise leave it alone
       unless old_wishes(category).any?
@@ -24,7 +24,14 @@ class WishesController < ApplicationController
       redirect_to category, :notice => "successfully remembered"
     end
   end
-
+  
+  def connect
+    @wish = current_user.wishes.create!(params[:wish])    
+    @item = Item.find(params[:wish][:item_id]) 
+    @wish.connect(@item)
+    redirect_to root_path     
+  end
+  
   def destroy
   end
   

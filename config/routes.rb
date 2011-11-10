@@ -1,6 +1,9 @@
 Giveaway::Application.routes.draw do
 
-  resources :wishes, :only => [:new, :create, :destroy]
+#### resources routes ####
+  resources :wishes, :only => [:new, :create, :destroy] do
+    post 'connect', :on => :member
+  end
 
   resources :sessions, :only => [:new, :create, :destroy]
 
@@ -19,9 +22,13 @@ Giveaway::Application.routes.draw do
     end
   end
   
+#### resources routes ####
+
   match '/signup', :to => 'users#new'
   match '/signin', :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
+  match '/checkin', :to => 'users#checkin', :via => :post
+  match '/connect', :to => 'wishes#connect', :via => :post
 
   root :to => "pages#home"
   

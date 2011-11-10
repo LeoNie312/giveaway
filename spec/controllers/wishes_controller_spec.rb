@@ -85,7 +85,7 @@ describe WishesController do
       end
     end
   end
-
+  
   describe "DELETE 'destroy'" do
     # it "should be successful" do
     #   delete 'destroy'
