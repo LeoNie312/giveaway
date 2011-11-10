@@ -13,7 +13,7 @@
 		<% unless onshelf_item.owner == current_user %>
 		<span class="item-request">
 			<%= form_for current_user.wishes.build(:item_id => onshelf_item.id,
-									:category_id => onshelf_item.category.id) do |f| %>
+									:category_id => onshelf_item.category.id), :url => { :controller => "wishes", :action => "connect" } do |f| %>
 			<%= f.hidden_field :item_id %>
 			<%= f.hidden_field :category_id %>
 			<%= f.submit "I want" %>
