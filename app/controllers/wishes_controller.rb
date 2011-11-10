@@ -8,11 +8,6 @@ class WishesController < ApplicationController
   
   def create
     category = Category.find_by_id(params[:wish][:category_id])
-    
-    # if there is old same wish exists, which hasn't connected to
-    # any item yet, redirect to category page without creating a
-    # new wish
-
 
     if category.nil?
       @title = "New Wish"
@@ -22,27 +17,31 @@ class WishesController < ApplicationController
     else
       
       # if there's old unconnected wish, take that wish out.
-      # and if it is a "I want" request, connect the wish 
-      # with the item. 
       if (wishes = old_wishes(category)).any?  # private method of this controller
         @wish = wishes.first
-        
-        if params[:wish][:item_id]
-          @item = Item.find(params[:wish][:item_id]) 
-          @wish.connect(@item)
-        end  
-      
-      # otherwise, create a new wish record directly, 
-      # with or without item_id  
+              
+      # otherwise, create a new wish record directly
+    
       else
         @wish = current_user.wishes.create!(params[:wish])
       end
+      
+      # if there is old same wish exists, which hasn't connected to
+      # any item yet, redirect to category page without creating a
+      # new wish
       
       redirect_to category
     end
 
   end
-
+  
+  def connect
+    @wish = current_user.wishes.create!(params[:wish])    
+    @item = Item.find(params[:wish][:item_id]) 
+    @wish.connect(@item)
+    redirect_to root_path     
+  end
+  
   def destroy
   end
   
