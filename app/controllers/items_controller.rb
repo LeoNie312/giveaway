@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_filter :authenticate
   
   def new
 
@@ -20,6 +21,11 @@ class ItemsController < ApplicationController
   end
 
   def update
+  end
+  
+  def search_items
+    @title = "Search items"
+    @hierarchy = find_categories_under("base")
   end
 
 end

@@ -97,6 +97,19 @@ describe CategoriesController do
                       :content => @base.name.capitalize)
     end
     
+    it "should show 'no record' message when no item found" do
+      @soft_drink = Factory(:category, :name => "soft drink")
+      @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
+                      :child_id => @soft_drink.id)
+                
+      get :show, :id => @soft_drink
+      response.should have_selector("p",
+                      :content => "no record")
+      # response.should have_selector("span",
+      #                 :class => "wish-memo",
+      #                 :content => '<input type="submit" value="Memo my wish">')
+    end
+    
     describe "categories sidebar" do
       
       before :each do

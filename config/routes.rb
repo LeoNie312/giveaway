@@ -9,14 +9,18 @@ Giveaway::Application.routes.draw do
 
   resources :users do
     member do
-      post 'checkin'
+      post 'checkin', :to => 'users#checkin'  
     end
   end
   
   resources :categories, :only => [:show]
   # match "/categories/:id", :to => "categories#show"
   
-  resources :items, :only => [:show, :new, :create, :update, :destroy]
+  resources :items, :only => [:show, :new, :create, :update, :destroy] do
+    collection do
+      get 'search', :to => 'items#search_items' # search_items_path
+    end
+  end
   
 #### resources routes ####
 

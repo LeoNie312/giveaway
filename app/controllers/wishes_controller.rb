@@ -1,38 +1,28 @@
 class WishesController < ApplicationController
   before_filter :authenticate
   
-  def new
-    @title = "New Wish"
-    @hierarchy = find_categories_under("base")
-  end
+  # def new
+  #   @title = "New Wish"
+  #   @hierarchy = find_categories_under("base")
+  # end
+  # 
   
   def create
     category = Category.find_by_id(params[:wish][:category_id])
-
-    if category.nil?
-      @title = "New Wish"
-      @hierarchy = find_categories_under("base")
-      flash.now[:error] = "unexpected error"
-      render 'new'
-    else
-      
-      # if there's old unconnected wish, take that wish out.
-      if (wishes = old_wishes(category)).any?  # private method of this controller
-        @wish = wishes.first
-              
-      # otherwise, create a new wish record directly
     
-      else
+    if category.nil?
+      flash[:error] = "unexpected error"
+      base = Category.find_by_name("base")
+      redirect_to base
+    else
+
+      # unless there are old wishes, create new wish,
+      # otherwise leave it alone
+      unless old_wishes(category).any?
         @wish = current_user.wishes.create!(params[:wish])
       end
-      
-      # if there is old same wish exists, which hasn't connected to
-      # any item yet, redirect to category page without creating a
-      # new wish
-      
-      redirect_to category
+      redirect_to category, :notice => "successfully remembered"
     end
-
   end
   
   def connect
