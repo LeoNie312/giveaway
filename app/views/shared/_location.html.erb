@@ -1,4 +1,4 @@
-<%= form_tag checkin_user_path(current_user) do  %>
+<%= form_tag checkin_user_path(current_user), :remote => true do  %>
 	<div><%= hidden_field_tag :name, location.name %></div>
   <div><%= submit_tag location.name %></div>
 <% end %>

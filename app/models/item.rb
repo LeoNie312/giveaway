@@ -1,7 +1,7 @@
 class Item < ActiveRecord::Base
   attr_accessible :description, :img_link, :category_id
   
-  before_save :calculate_onshelf_time
+  before_create :calculate_onshelf_time
   
   before_destroy :disconnect_wishes
   
@@ -21,16 +21,25 @@ class Item < ActiveRecord::Base
   
   default_scope :order => 'items.onshelf_at DESC'
   
+  # This method should change owner attribute
+  # to new owner, and toggle onshelf attribute,
+  # and make onshelf_at nil.
+  # BTW, run wish.disconnect! on every wish connected
+  # to it, and destroy the successful wish. 
+  # Quite a bit of work :-)
+  #
+  # def transfer!
+  # end
+  
+  # This method should toggle onshelf attribute,
+  # and calculate onshelf_at time
+  #
+  # def reonshelf
+  # end
   
   private
     def calculate_onshelf_time
-      # if it is saved the first time, then record;
-      # or if not, but onshelf is set to true, 
-      # that means the owner decided to re-onshelf
-      # the item, then record
-      if new_record? || self.onshelf?
-        self.onshelf_at = DateTime.now
-      end
+      self.onshelf_at = DateTime.now
     end
     
     def disconnect_wishes
