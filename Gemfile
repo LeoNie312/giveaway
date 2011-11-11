@@ -48,8 +48,11 @@ group :development do
 end
 
 group :test do 
-	gem "spork"
 	gem 'rspec-rails', '2.6.1'
 	gem 'webrat', '0.7.1'
-    gem 'factory_girl_rails', '1.0'
+  gem 'factory_girl_rails', '1.0'
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-rspec'
+  gem "spork", "> 0.9.0.rc"
+  gem "guard-spork"
 end
