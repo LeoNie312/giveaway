@@ -2,7 +2,9 @@ class ItemsController < ApplicationController
   before_filter :authenticate
   
   def new
-
+    @title = "New Item"
+    @item = Item.new
+    @hierarchy = find_categories_under("base")
   end
   
   def show
