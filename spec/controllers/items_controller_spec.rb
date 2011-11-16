@@ -29,13 +29,65 @@ describe ItemsController do
       response.should redirect_to(error_url)
     end
   end
+  
+  describe "GET 'new'" do
+    
+    before :each do
+      @user = Factory(:user)
+      test_sign_in @user
+    end
+    
+    it "should be successful" do
+      get :new
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :new
+      response.should have_selector("title", content: "New Item")
+    end
+  end
 
   describe "POST 'create'" do
-    pending
-    # it "should be successful" do
-    #   post :create
-    #   response.should be_success
-    # end
+    
+    before :each do
+      @user = Factory(:user)
+      test_sign_in @user
+      @attr = {:description => "some text", :img_link => "http://google.com/sample.jpg",
+                :category => @drink.name }
+    end
+    
+    describe "failure" do
+      
+      it "should deny the 'base' category" do
+        @base = Factory(:category, :name => "base")
+        lambda do
+          post :create, :item => @attr.merge(:category => @base.name)
+          response.should redirect_to(new_item_url)
+        end.should_not change(Item, :count)
+      end
+      
+      it "should deny unrecognized category" do
+        lambda do
+          post :create, :item => @attr.merge(:category => "unrecognized category")
+          response.should redirect_to(new_item_url)
+        end.should_not change(Item, :count)
+      end
+    end
+    
+    describe "success" do
+      
+      it "should create a new item" do
+        lambda do
+          post :create, :item => @attr
+        end.should change(Item, :count).by(1)
+      end
+      
+      it "should redirect to category page" do
+        post :create, :item => @attr
+        response.should redirect_to(@drink)
+      end
+    end
   end
   
   describe "GET 'search_items'" do
@@ -70,6 +122,16 @@ describe ItemsController do
     
     it "should deny access to 'search_items'" do
       get :search_items
+      response.should redirect_to(signin_path)
+    end
+    
+    it "should deny access to 'new'" do
+      get :new
+      response.should redirect_to(signin_path)
+    end
+    
+    it "should deny access to 'create'" do
+      get :create
       response.should redirect_to(signin_path)
     end
   end
