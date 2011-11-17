@@ -40,9 +40,10 @@
 		<%= gravatar_for @user %>
 		<%= @user.name %>
 	</h2>
- 
-	<h1><%= link_to "I have something:", new_item_path %></h1>
-	<h1><%= link_to "I want something:", search_items_path %></h1>
-	<h1><%= link_to "Just Browse", base_category %></h1>  
+ 	<div id="homepage-choices">
+		<div id="new-item-div" class="round"><%= link_to "I have something", new_item_path %></div>
+		<div id="search-item-div" class="round"><%= link_to "I want something", search_items_path %></div>
+		<div id="browse-div" class="round"><%= link_to "Just Browse", base_category %></div>  
+	</div>
 </div>	
 <% end %>

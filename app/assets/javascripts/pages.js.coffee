@@ -14,4 +14,13 @@ jQuery ->
 				.removeClass('location-chosen')
 				
 			$(this).addClass('location-chosen')
-			
+	
+	$('div#homepage-choices div').each ->
+		$(this).hover \
+			( ->
+				$(this).addClass('big-div-mouseover')
+			)
+			,
+			( ->
+				$(this).removeClass('big-div-mouseover')
+			)

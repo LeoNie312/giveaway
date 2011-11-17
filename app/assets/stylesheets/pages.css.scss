@@ -77,6 +77,39 @@ div#sidebar.locations {
 }
 
 
+$home-div-color: #382306;
+$home-div-hover: #c27915;
+
+
+div#main div#homepage-choices {
+	text-align: center;
+	font-size: 170%;
+	font-weight: bold;
+	
+	a {
+		color: $home-div-color;
+		text-decoration: none;
+	
+		&:hover {
+			color: $home-div-hover;
+		}
+	}
+	
+	div {
+		border: 1px solid black;
+		margin: 5px;
+		padding: 20px 0px;		
+	}
+}
+
+.big-div-mouseover {
+	background: #fcf5ca;
+	cursor: pointer;
+
+	a {
+		color: $home-div-hover !important;		
+	}
+}
 
 
 
