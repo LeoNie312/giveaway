@@ -82,9 +82,20 @@ $home-div-hover: #c27915;
 
 
 div#main div#homepage-choices {
-	text-align: center;
-	font-size: 170%;
-	font-weight: bold;
+	
+	div {
+		margin: 10px 0px;
+	}
+	
+	/*three big titles*/
+	div.round {
+		text-align: center;
+		font-size: 170%;
+		font-weight: bold;	
+		border: 1px solid black;
+		padding: 20px 0px;
+	}
+	
 	
 	a {
 		color: $home-div-color;
@@ -95,10 +106,17 @@ div#main div#homepage-choices {
 		}
 	}
 	
-	div {
-		border: 1px solid black;
-		margin: 5px;
-		padding: 20px 0px;		
+	
+	/*contents*/
+	#homepage-choices-dropdown {
+		position: relative;
+		top: -10px;
+		border-right: 1px solid black;
+		border-left: 1px solid black;
+		border-bottom: 1px solid black;
+		padding: 20px 0px;
+		
+		display: none;
 	}
 }
 
@@ -109,6 +127,10 @@ div#main div#homepage-choices {
 	a {
 		color: $home-div-hover !important;		
 	}
+}
+
+.big-div-clickable {
+	background: #fcf5ca;
 }
 
 

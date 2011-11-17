@@ -15,7 +15,7 @@ jQuery ->
 				
 			$(this).addClass('location-chosen')
 	
-	$('div#homepage-choices div').each ->
+	$('div#homepage-choices div.round').each ->
 		$(this).hover \
 			( ->
 				$(this).addClass('big-div-mouseover')
@@ -24,3 +24,16 @@ jQuery ->
 			( ->
 				$(this).removeClass('big-div-mouseover')
 			)
+		
+		
+	
+	$('div#homepage-choices div.clickable-dropdown').toggle \
+		( ->
+			$(this).addClass('big-div-clickable')
+			$(this).next().slideDown('slow')
+		)
+		,
+		( ->
+			$(this).removeClass('big-div-clickable')
+			$(this).next().slideUp('fast')
+		)
