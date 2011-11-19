@@ -54,7 +54,7 @@ describe ItemsController do
       @user = Factory(:user)
       test_sign_in @user
       @attr = {:description => "some text", :img_link => "http://google.com/sample.jpg",
-                :category => @drink.name }
+              :category_id => nil }
     end
     
     describe "failure" do
@@ -62,15 +62,15 @@ describe ItemsController do
       it "should deny the 'base' category" do
         @base = Factory(:category, :name => "base")
         lambda do
-          post :create, :item => @attr.merge(:category => @base.name)
-          response.should redirect_to(new_item_url)
+          post :create, :item => @attr, :category_name => @base.name
+          response.should render_template(:new)
         end.should_not change(Item, :count)
       end
       
       it "should deny unrecognized category" do
         lambda do
-          post :create, :item => @attr.merge(:category => "unrecognized category")
-          response.should redirect_to(new_item_url)
+          post :create, :item => @attr, :category_name => "unrecognized category"
+          response.should render_template(:new)
         end.should_not change(Item, :count)
       end
     end
@@ -79,12 +79,12 @@ describe ItemsController do
       
       it "should create a new item" do
         lambda do
-          post :create, :item => @attr
+          post :create, :item => @attr, :category_name => @drink.name
         end.should change(Item, :count).by(1)
       end
       
       it "should redirect to category page" do
-        post :create, :item => @attr
+        post :create, :item => @attr, :category_name => @drink.name
         response.should redirect_to(@drink)
       end
     end

@@ -96,27 +96,27 @@ describe Item do
       long_link_item.should_not be_valid
     end
     
-    # it "should accept valid img link" do
-    #   links = %w[http://example.com/photos/id/3,
-    #             http://www.example.com/photos.php?id=3,
-    #             http://www.example.com/photo.jpg]
-    #   links.each do |link|
-    #     item = @owner.items.build(@attr.merge(:img_link => link))
-    #     item.should be_valid
-    #   end
-    # end
-    # 
-    # it "should reject img link that is not valid" do
-    #   links = %w[example.com/photos/id/3,
-    #             www.example.com/photos.php?id=3,
-    #             www.example.com/photo.jpg,
-    #             http://www.foo,com/photo.jpg,
-    #             http://foo/photo.jpg]
-    #   links.each do |link|
-    #     item = @owner.items.build(@attr.merge(:img_link => link))
-    #     item.should_not be_valid
-    #   end
-    # end
+    it "should accept valid img link" do
+      links = %w[http://example.com/photos/id/3,
+                http://www.example.com/photos.php?id=3,
+                http://www.example.com/photo.jpg]
+      links.each do |link|
+        item = @owner.items.build(@attr.merge(:img_link => link))
+        item.should be_valid
+      end
+    end
+    
+    it "should reject img link that is not valid" do
+      links = %w[example.com/photos/id/3,
+                www.example.com/photos.php?id=3,
+                www.example.com/photo.jpg,
+                http://www.foo,com/photo.jpg,
+                http://foo/photo.jpg]
+      links.each do |link|
+        item = @owner.items.build(@attr.merge(:img_link => link))
+        item.should_not be_valid
+      end
+    end
     
     it "should require the category id" do
       @owner.items.build(@attr.merge(:category_id => nil))

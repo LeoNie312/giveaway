@@ -6,5 +6,5 @@ jQuery ->
 	$('#item-categories-block li a').click ->
 		category_string = $(this).text().toLowerCase()
 		category_string = category_string.replace(/^([a-z]+)(.*)$/, '$1')
-		$('form.new_item :text').attr('value',category_string)
+		$('input[id="category_name"]').attr('value',category_string)
 		return false
