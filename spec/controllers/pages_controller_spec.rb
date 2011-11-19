@@ -27,6 +27,11 @@ describe PagesController do
         test_sign_in @user
         @location1 = Factory(:location, name: "LWN")
         @location2 = Factory(:location, name: "Canteen A")
+        
+        @base = Factory(:category, :name => "base")
+        @drink = Factory(:category, :name => "drink")
+        @connection1 = Factory(:categories_connection, parent_id: @base.id,
+                                  child_id: @drink.id)
       end
       
       it "should display locations sidebar" do

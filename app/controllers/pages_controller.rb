@@ -4,6 +4,9 @@ class PagesController < ApplicationController
       @user = current_user
       @title = "Homepage"
       @locations = Location.all
+      
+      @hierarchy = find_categories_under("base")
+      @item = Item.new
     else
       @title = "Home"
     end

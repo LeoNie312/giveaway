@@ -44,14 +44,18 @@
 		<div id="new-item-div">
 			<div class="round clickable-dropdown"><%= link_to "I have something", new_item_path %></div>
 			
-			<div id="homepage-choices-dropdown"><h1>there's be something here.</h1></div>
+			<div id="homepage-choices-dropdown">
+				<%= render 'items/form' %>
+			</div>
 		</div>
 		
 		
 		<div id="search-item-div">
 			<div class="round clickable-dropdown"><%= link_to "I want something", search_items_path %></div>
-			
-			<div id="homepage-choices-dropdown"><h1>there'll be something here too.</h1></div>
+		
+			<div id="homepage-choices-dropdown">
+				<h1>there's be something here.</h1>	
+			</div>
 		</div>
 		
 		<div id="browse-div" class="round"><%= link_to "Just Browse", base_category %></div>  

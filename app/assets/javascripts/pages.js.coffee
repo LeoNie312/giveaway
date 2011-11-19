@@ -37,3 +37,6 @@ jQuery ->
 			$(this).removeClass('big-div-clickable')
 			$(this).next().slideUp('fast')
 		)
+	
+	$('div#homepage-choices div#browse-div').click ->
+		window.location = $(this).find('a').attr('href')
