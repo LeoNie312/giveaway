@@ -54,7 +54,7 @@
 			<div class="round clickable-dropdown"><%= link_to "I want something", search_items_path %></div>
 		
 			<div id="homepage-choices-dropdown">
-				<h1>there's be something here.</h1>	
+				<%= render 'shared/categories_hierarchy', hierarchy: @hierarchy %>
 			</div>
 		</div>
 		
