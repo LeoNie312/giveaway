@@ -5,7 +5,7 @@
 </div>	
 
 <div id="category-name-singleton">
-	I have <%= text_field_tag "category_name" %>
+	I have <%= text_field_tag "category_name", nil, :form => 'new_item' %>
 </div>	
 
 <%= form_for @item do |f| %>
