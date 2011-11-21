@@ -4,9 +4,8 @@ describe ItemsController do
   render_views
     
   before :each do
-    @base = Factory(:category, name: "base")
-    @drink = Factory(:category, name: "drink")
-    Factory(:categories_connection, parent: @base, child: @drink)
+    @base = Category.find_by_name("base")
+    @drink = Category.find_by_name("drink")
   end
 
   describe "GET 'show'" do
@@ -25,7 +24,7 @@ describe ItemsController do
     end
     
     it "should redirect to error page at non-existent item" do
-      get :show, :id => 10000
+      get :show, :id => 100000
       response.should redirect_to(error_url)
     end
   end
@@ -60,7 +59,6 @@ describe ItemsController do
     describe "failure" do
       
       it "should deny the 'base' category" do
-        @base = Factory(:category, :name => "base")
         lambda do
           post :create, :item => @attr, :category_name => @base.name
           response.should render_template(:new)

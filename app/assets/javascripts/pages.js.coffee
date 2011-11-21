@@ -29,6 +29,8 @@ jQuery ->
 	
 	$('div#homepage-choices div.clickable-dropdown').toggle \
 		( ->
+			$('.big-div-clickable').next().slideUp('fast')
+			$('.big-div-clickable').removeClass('big-div-clickable')
 			$(this).addClass('big-div-clickable')
 			$(this).next().slideDown('slow')
 		)

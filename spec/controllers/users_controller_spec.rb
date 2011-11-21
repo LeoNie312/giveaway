@@ -181,11 +181,11 @@ describe UsersController do
     
     before(:each) do
       @user = Factory(:user)
-      @location1 = Factory(:location, name: "LWN")
+      @location1 = Location.find_by_name("LWN Library")
     end
     
     it "should should require the user to sign in first" do
-      post :checkin, id: @user, name: "LWN"
+      post :checkin, id: @user, name: @location1.name
       response.should redirect_to(signin_path)
     end
     
@@ -196,7 +196,7 @@ describe UsersController do
       @user.reload
       @user.location.should == @location1
       
-      location2 = Factory(:location, name: "Canteen A")
+      location2 = Location.find_by_name("Canteen A")
       post :checkin, id: @user, name: location2.name
       response.should be_redirect
       @user.reload

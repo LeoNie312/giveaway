@@ -4,9 +4,8 @@ describe WishesController do
   render_views
 
   before :each do
-    @base = Factory(:category, name: "base")
-    @drink = Factory(:category, name: "drink")
-    Factory(:categories_connection, parent: @base, child: @drink)
+    @base = Category.find_by_name("base")
+    @drink = Category.find_by_name("drink")
     @user = Factory(:user)
   end
 
@@ -102,7 +101,7 @@ describe WishesController do
     
     it "should deny access to 'create'" do
       @attr = {category_id: @drink}
-      post :create
+      post :create, :wish => @attr
       response.should redirect_to(signin_path)
     end
   end

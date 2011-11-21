@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Wish do
   
   before :each do
-    @category = Factory(:category)
+    @drink = Category.find_by_name("drink")
     @wanter = Factory(:user)
     @attr = {
-      :category_id => 1
+      :category_id => @drink.id
     }
     @wish = @wanter.wishes.build(@attr)
   end
@@ -24,7 +24,7 @@ describe Wish do
     end
     
     it "should require wanter id" do
-      Wish.new(@attr.merge(:wanter_id=>1)).should_not be_valid
+      Wish.new(@attr.merge(:wanter_id=>@wanter.id)).should_not be_valid
     end
     
   end
@@ -53,8 +53,8 @@ describe Wish do
       end
       
       it "should associate to the right category" do
-        @wish.category.should == @category
-        @wish.category_id.should == @category.id
+        @wish.category.should == @drink
+        @wish.category_id.should == @drink.id
       end
     end
     

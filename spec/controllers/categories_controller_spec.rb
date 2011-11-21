@@ -6,10 +6,10 @@ describe CategoriesController do
   describe "GET 'show'" do
     
     before :each do
-      @base = Factory(:category)
-      @drink = Factory(:category, :name => "drink")
-      @connection1 = Factory(:categories_connection, :parent_id => @base.id,
-                      :child_id => @drink.id)
+      @base = Category.find_by_name("base")
+      @drink = Category.find_by_name("drink")
+      # @connection1 = Factory(:categories_connection, :parent_id => @base.id,
+      #                 :child_id => @drink.id)
                       
       @user = Factory(:user)
       test_sign_in @user
@@ -23,7 +23,7 @@ describe CategoriesController do
     end
     
     it "should redirect to error page when categories not found" do
-      get :show, :id => 1000
+      get :show, :id => 100000
       response.should redirect_to(error_path)
     end
     
@@ -51,9 +51,7 @@ describe CategoriesController do
     
     it "should have children category's items" do
       
-      @soft_drink = Factory(:category, :name => "soft drink")
-      @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
-                      :child_id => @soft_drink.id)
+      @soft_drink = Category.find_by_name("soft drink")
       @item2 = Factory(:item, :category_id => @soft_drink.id,
                       :owner => @user)
       
@@ -64,9 +62,7 @@ describe CategoriesController do
       @item3 = Factory(:item, :category_id => @milk.id,
                       :owner => @user)
                       
-      @stationery = Factory(:category, :name => "stationery")
-      @connection3 = Factory(:categories_connection, :parent_id => @base.id,
-                      :child_id => @stationery.id)
+      @stationery = Category.find_by_name("stationery")
 
       @item4 = Factory(:item, :category_id => @stationery.id,
                       :owner => @user)
@@ -98,9 +94,7 @@ describe CategoriesController do
     end
     
     it "should show 'no record' message when no item found" do
-      @soft_drink = Factory(:category, :name => "soft drink")
-      @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
-                      :child_id => @soft_drink.id)
+      @soft_drink = Category.find_by_name("soft drink")
                 
       get :show, :id => @soft_drink
       response.should have_selector("p",
@@ -113,13 +107,8 @@ describe CategoriesController do
     describe "categories sidebar" do
       
       before :each do
-        @soft_drink = Factory(:category, :name => "soft drink")
-        @connection2 = Factory(:categories_connection, :parent_id => @drink.id,
-                        :child_id => @soft_drink.id)
-        @coke = Factory(:category, :name => "coke")
-        @connection3 = Factory(:categories_connection, :parent_id => @soft_drink.id,
-                        :child_id => @coke.id) 
-        
+        @soft_drink = Category.find_by_name("soft drink")
+        @coke = Category.find_by_name("coca cola")
       end
       
       it "should have a nested categories structure" do
@@ -141,11 +130,9 @@ describe CategoriesController do
   describe "authentication" do
     
     before :each do
-      @base = Factory(:category)
-      @drink = Factory(:category, :name => "drink")
-      @connection1 = Factory(:categories_connection, :parent_id => @base.id,
-                      :child_id => @drink.id)
-                      
+      @base = Category.find_by_name("base")
+      @drink = Category.find_by_name("drink")
+
       @user = Factory(:user)
       @item1 = Factory(:item, :category_id=>@drink.id, 
                         :owner=>@user)

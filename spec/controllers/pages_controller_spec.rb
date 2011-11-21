@@ -25,13 +25,8 @@ describe PagesController do
       before :each do
         @user = Factory(:user)
         test_sign_in @user
-        @location1 = Factory(:location, name: "LWN")
-        @location2 = Factory(:location, name: "Canteen A")
-        
-        @base = Factory(:category, :name => "base")
-        @drink = Factory(:category, :name => "drink")
-        @connection1 = Factory(:categories_connection, parent_id: @base.id,
-                                  child_id: @drink.id)
+        @location1 = Location.find_by_name("LWN Library")
+        @location2 = Location.find_by_name("Canteen A")
       end
       
       it "should display locations sidebar" do
