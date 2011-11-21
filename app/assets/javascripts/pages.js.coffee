@@ -1,4 +1,5 @@
 jQuery ->
+	# ajaxify locations sidebar
 	$('div#sidebar.locations :submit').each ->
 		$(this).hover \
 			( ->
@@ -15,6 +16,7 @@ jQuery ->
 				
 			$(this).addClass('location-chosen')
 	
+	# add mouseover effects to three big div
 	$('div#homepage-choices div.round').each ->
 		$(this).hover \
 			( ->
@@ -26,7 +28,7 @@ jQuery ->
 			)
 		
 		
-	
+	# slideDown and slideUp effects
 	$('div#homepage-choices div.clickable-dropdown').toggle \
 		( ->
 			$('.big-div-clickable').next().slideUp('fast')
@@ -40,5 +42,6 @@ jQuery ->
 			$(this).next().slideUp('fast')
 		)
 	
+	# turn 'just browse' div to a link
 	$('div#homepage-choices div#browse-div').click ->
 		window.location = $(this).find('a').attr('href')
