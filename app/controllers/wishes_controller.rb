@@ -26,10 +26,11 @@ class WishesController < ApplicationController
   end
   
   def connect
+    category = Category.find_by_id(params[:wish][:category_id])
     @wish = current_user.wishes.create!(params[:wish])    
     @item = Item.find(params[:wish][:item_id]) 
     @wish.connect(@item)
-    redirect_to root_path     
+    redirect_to category, :notice => "Ok you want this #{category.name}"
   end
   
   def destroy
