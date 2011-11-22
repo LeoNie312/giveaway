@@ -1,6 +1,10 @@
-<%= link_to "#" do %>
-	<div id="wanter-snippet">
+<div id="wanter-snippet">
 		<span><%= gravatar_for(wish.wanter) %></span><br/>
-		<span><%= wish.wanter.name %></span>
-	</div>	
-<% end %>
+		<span>
+			<%= form_tag transfer_item_path(@item), :method => :put do %>
+				<%= hidden_field_tag 'receiver_id', wish.wanter.id %>
+				<%= submit_tag word_wrap(wish.wanter.name, :line_width => 13), 
+						:confirm => "About to transfer to #{wish.wanter.name}" %>
+			<% end %>
+		</span>	
+</div>	

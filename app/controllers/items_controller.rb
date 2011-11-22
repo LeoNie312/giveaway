@@ -43,5 +43,11 @@ class ItemsController < ApplicationController
     @title = "Search items"
     @hierarchy = find_categories_under("base")
   end
+  
+  def transfer
+    @item = Item.find_by_id(params[:id])
+    @receiver = User.find_by_id(params[:receiver_id])
+    redirect_to @item, :notice => "#{@receiver.name}"
+  end
 
 end

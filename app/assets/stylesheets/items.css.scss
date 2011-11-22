@@ -9,10 +9,20 @@ div#category-name-singleton {
 div#wanter-snippet {
 	display: inline-block;
 	width: 80px;
-	font-size: 40%;
+	height: 91px;
 	text-align: center;
 	background: #ccc;
-	padding-top: 8px;
+	padding-top: 10px;
+	margin-left: 15px;
+	vertical-align: text-top;
+
+	form input[type=submit] {
+		border: 1px dotted #998966;
+		background: #397199;
+		color: white;
+		font-size: 50%;
+		cursor: pointer;
+	}
 }
 
 div#item-wishes {

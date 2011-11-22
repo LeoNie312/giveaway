@@ -106,6 +106,22 @@ describe ItemsController do
     end
   end
   
+  describe "UPDATE 'transfer'" do
+    
+    before :each do
+      @user = Factory(:user)
+      test_sign_in @user
+      
+      @item = Factory(:item, :category_id => @drink.id, :owner => @user)
+      @receiver = Factory(:user, :name => Factory.next(:name), :email => Factory.next(:email))
+    end
+    
+    it "should be redirect" do
+      put :transfer, :id => @item.id, :receiver_id => @receiver
+      response.should be_redirect
+    end
+  end
+  
   describe "authentication" do
     
     before :each do

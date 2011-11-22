@@ -20,6 +20,8 @@ Giveaway::Application.routes.draw do
     collection do
       get 'search', :to => 'items#search_items' # search_items_path
     end
+    
+    put 'transfer', :to => 'items#transfer', :on => :member
   end
   
 #### resources routes ####
