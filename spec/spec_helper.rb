@@ -36,6 +36,14 @@ Spork.prefork do
     def test_sign_in(user)
       controller.sign_in(user)
     end
+    
+    def base_cate
+      Category.find_by_name("base")
+    end
+    
+    def drink_cate
+      Category.find_by_name("drink")
+    end
   end
 
 end

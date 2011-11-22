@@ -1,12 +1,13 @@
 <h1><%= @item.owner.name %>'s item</h1>
 <div class="user-stats">
 	<span><%= link_to gravatar_for(@item.owner), @item.owner %></span>
-	<span><%= link_to @item.owner.name, @item.owner %>
+	<span><%= link_to @item.owner.name, @item.owner %></span>
 </div>	
 <div id="item-specs">
 <%= render @item %>
 
 <div id="item-wishes">
+	<p>People who wanted this:</p>
 	<%= render @item.wishes %>
 </div>	
 </div>

@@ -4,7 +4,7 @@ describe UsersLocation do
 
   before :each do
     @user = Factory(:user)
-    @location = Factory(:location, name: "LWN Library")
+    @location = Location.find_by_name("LWN Library")
   end
 
   describe "validation" do
@@ -22,7 +22,7 @@ describe UsersLocation do
     it "should require a unique user_id" do
       UsersLocation.create!(location_id: @location.id,
                   user_id: @user.id)
-      other_location = Factory(:location, name: "NBS")
+      other_location = Location.find_by_name("Canteen A")
       UsersLocation.new(location_id: other_location.id,
                   user_id: @user.id).should_not be_valid
     end

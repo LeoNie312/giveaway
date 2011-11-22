@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Item do
   
   before :each do
-    @category = Factory(:category)
+    @drink = drink_cate
     @owner = Factory(:user)
     @attr = {:description=>"this is an item", 
         :img_link=>"http://example.com/some_pic",
-        :category_id => @category.id}
+        :category_id => @drink.id}
   end
   
   it "should create a new instance of Item given valid attributes" do
@@ -25,8 +25,8 @@ describe Item do
     end
     
     it "should have the right associated category" do
-      @item.category.should == @category
-      @item.category_id.should == @category.id
+      @item.category.should == @drink
+      @item.category_id.should == @drink.id
     end
   
   end
@@ -37,7 +37,7 @@ describe Item do
       @item = @owner.items.create(@attr)      
       another_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
       other_user = Factory(:user, :email=>Factory.next(:email), :name=>Factory.next(:name))
-      category = Factory(:category)
+      category = drink_cate
       @wish1 = Factory(:wish, :wanter=>another_user, :category=>category, 
                       :item_id => @item.id ,:connected_at=>1.day.ago,
                       :created_at => 2.days.ago)
@@ -79,6 +79,66 @@ describe Item do
     it "should have the right owner" do
       @item.owner.should == @owner
       @item.owner_id.should == @owner.id
+    end
+  end
+  
+  describe "transferation" do
+    
+    before :each do
+      @item = @owner.items.create(@attr)
+      
+      @wanter = Factory(:user, :email => Factory.next(:email), :name => Factory.next(:name))
+      @wish1 = Factory(:wish, category_id: @item.category.id,
+                item_id: @item.id,
+                wanter_id: @wanter.id)
+      
+      @another_wanter = Factory(:user, :email => Factory.next(:email), :name => Factory.next(:name))
+      @wish2 = Factory(:wish, category_id: @item.category.id,
+                item_id: @item.id,
+                wanter_id: @another_wanter.id)
+    end
+    
+    it "should have a 'transfer!' method" do
+      @item.should respond_to(:transfer!)
+    end
+    
+    it "should change the owner" do
+      @item.transfer!(@wanter)
+      @item.owner.should == @wanter
+      @item.owner_id.should == @wanter.id
+    end
+    
+    it "should alert when receiver is the owner itself" do
+      lambda do
+        @item.transfer!(@owner)
+      end.should raise_exception
+    end
+    
+    it "should offshelf the item" do
+      @item.transfer!(@wanter)
+      @item.should_not be_onshelf
+      @item.onshelf_at.should be_nil
+    end
+    
+    it "should disconnect every wish" do
+      @item.transfer!(@wanter)
+      @item.reload
+      @item.wishes.should be_empty
+      @wish2.reload
+      @wish2.item.should be_nil
+      @wish2.should_not be_connected
+      @wish2.connected_at.should be_nil
+    end
+    
+    it "should destroy receiver's wish" do
+      lambda do        
+        @item.transfer!(@wanter)
+      end.should change(Wish, :count).by(-1)
+      
+      lambda do
+        @wish1.reload
+      end.should raise_exception(ActiveRecord::RecordNotFound)
+      
     end
   end
   

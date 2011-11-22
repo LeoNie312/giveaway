@@ -1,13 +1,13 @@
-Factory.define :category do |c|
-  c.name "base"
-end
+drink = Category.find_by_name("drink")
+
 
 Factory.define :item do |i|
   i.description  "this is an item"
   i.img_link     "http://www.example.com/photos/some_pic.jpg"
+  i.category_id   drink.id
   i.association  :owner
   i.onshelf       true
-  i.category_id   1
+  i.onshelf_at    1.day.ago
 end
 
 Factory.define :user do |u|
@@ -32,14 +32,6 @@ end
 
 Factory.sequence :name do |n|
   "person-#{n}"
-end
-
-Factory.define :categories_connection do |c|
-  
-end
-
-Factory.define :location do |l|
-  
 end
 
 Factory.define :users_location do |u|

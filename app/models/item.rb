@@ -28,9 +28,23 @@ class Item < ActiveRecord::Base
   # BTW, run wish.disconnect! on every wish connected
   # to it, and destroy the successful wish. 
   # Quite a bit of work :-)
-  #
-  # def transfer!
-  # end
+  
+  def transfer!(receiver)
+    raise "receiver is owner!" if owner == receiver
+    self.owner = receiver
+    self.toggle!(:onshelf) if onshelf?
+    self.onshelf_at = nil
+    
+    wishes.each do |wish|
+      unless wish.wanter == receiver
+        wish.disconnect!
+      else
+        wish.destroy
+      end
+    end
+    
+    self.save!
+  end
   
   # This method should toggle onshelf attribute,
   # and calculate onshelf_at time

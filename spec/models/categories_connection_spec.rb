@@ -3,14 +3,15 @@ require 'spec_helper'
 describe CategoriesConnection do
   
   before :each do
-    @parent_cate = Factory(:category)
-    @child_cate = Factory(:category, :name => "drink")
+    @base = Category.find_by_name("base")
+    @drink = Category.find_by_name("drink")
   end
 
   describe "category association" do
     
     before :each do
-      @connection = CategoriesConnection.create(:parent_id=>@parent_cate.id, :child_id=>@parent_cate.id)
+      @connection = CategoriesConnection.where(:parent_id=>@base.id, 
+                                            :child_id=>@drink.id).first
     end
     
     it "should have a parent method" do
@@ -27,12 +28,12 @@ describe CategoriesConnection do
   describe "validation" do
     
     it "should require parent id" do
-      CategoriesConnection.new(:child_id => @child_cate.id)
+      CategoriesConnection.new(:child_id => @drink.id)
         .should_not be_valid
     end
     
     it "should require child id" do
-      CategoriesConnection.new(:parent_id => @child_cate.id)
+      CategoriesConnection.new(:parent_id => @drink.id)
         .should_not be_valid
     end
   end

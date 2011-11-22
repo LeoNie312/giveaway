@@ -165,7 +165,7 @@ describe User do
     describe "with wishes" do
       before :each do
         @user = User.create(@attr)
-        category = Factory(:category)
+        category = drink_cate
         @wish1 = Factory(:wish, :wanter=>@user, :category => category, :created_at=>1.day.ago)
         @wish2 = Factory(:wish, :wanter=>@user,:category => category, :created_at=>1.hour.ago)
       end
@@ -190,9 +190,12 @@ describe User do
       
       before :each do
         @user = User.create(@attr)
-        @item1 = Factory(:item, :owner=>@user)
-        sleep(1)
-        @item2 = Factory(:item, :owner=>@user)        
+        @item1 = Factory(:item, :owner=>@user, :created_at => 2.days.ago)
+        @item1.onshelf_at = 2.days.ago
+        @item1.save
+        @item2 = Factory(:item, :owner=>@user, :created_at => 1.day.ago)        
+        @item2.onshelf_at = 1.day.ago
+        @item2.save
       end
       
       it "should have a items method" do
@@ -215,7 +218,7 @@ describe User do
       
       before :each do
         @user = User.create(@attr)
-        @location = Factory(:location, name: "LWN Library")
+        @location = Location.find_by_name("LWN Library")
         @userslocation = Factory(:users_location, user_id: @user.id,
                   location_id: @location.id)
       end
@@ -234,7 +237,7 @@ describe User do
       end
       
       it "should checkin a user" do
-        another_location = Factory(:location, name: "NBS")
+        another_location = Location.find_by_name("Canteen A")
         @userslocation.destroy
         @user.location.should be_nil
         

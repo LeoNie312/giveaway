@@ -5,3 +5,17 @@ form.new_item {
 div#category-name-singleton {
 	clear: both;
 }
+
+div#wanter-snippet {
+	display: inline-block;
+	width: 80px;
+	font-size: 40%;
+	text-align: center;
+	background: #ccc;
+	padding-top: 8px;
+}
+
+div#item-wishes {
+	border: 2px solid #555;
+	padding: 10px;
+}

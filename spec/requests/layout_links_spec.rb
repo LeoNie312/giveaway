@@ -68,10 +68,9 @@ describe "static pages" do
 
   describe "when signed in" do
     before(:each) do
-      @base = Factory(:category, name: "base")
-      @drink = Factory(:category, name: "drink")
-      @connection1 = Factory(:categories_connection, parent_id: @base.id,
-                              child_id: @drink.id)
+      @base = base_cate
+      @drink = drink_cate
+
       @user = Factory(:user)
       visit signin_path
       fill_in :session_email, :with => @user.email
