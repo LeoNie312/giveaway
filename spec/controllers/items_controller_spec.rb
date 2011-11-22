@@ -171,6 +171,14 @@ describe ItemsController do
       get :create
       response.should redirect_to(signin_path)
     end
+    
+    it "should deny access to 'transer'" do
+      @item = Factory(:item, :category_id => @drink.id, :owner => @user)
+      @receiver = Factory(:user, :name => Factory.next(:name), :email => Factory.next(:email))
+      
+      put :transfer, :id => @item.id, :receiver_id => @receiver
+      response.should redirect_to(signin_path)
+    end
   end
 
   # describe "GET 'update'" do

@@ -7,9 +7,10 @@
 	<h2>All your items:</h2>
 	<ul>
 	<% @user.items.each do |item| %>
-	<%= render item %>
+	<%= render item if item.onshelf? %>
 	<% end %>
 	</ul>
+	<%= link_to "See my off-shelf items", "#" %>
 </div>
 
 <div id="user_wishes_list">

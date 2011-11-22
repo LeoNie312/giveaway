@@ -1,8 +1,8 @@
 <div class="item-info">
-	
+	<% location = item.owner.location %>
 	<span class="item-description"><%= link_to item.description, item %></span>
 	<span class="category-tag"><%= item.category.name.capitalize %></span><br/>
 	<span class="img-link">img url: <%= link_to item.img_link, item.img_link, target:'_blank' %></span><br/>
 	<span class="item-extra-info"><%= time_ago_in_words(item.onshelf_at) %> ago at 
-		<strong>somewhere</strong></span>
+		<strong><%= (location.nil?)? "" : location.name %></strong></span>
 </div>	

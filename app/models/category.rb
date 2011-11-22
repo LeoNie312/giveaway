@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  has_many :items
+  has_many :items, :conditions => '(items.onshelf_at IS NOT NULL)'
   
   # once a wish is connected to an item, 
   # it will no longer be retrieved by using
