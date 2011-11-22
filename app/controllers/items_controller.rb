@@ -5,6 +5,8 @@ class ItemsController < ApplicationController
     @item = Item.find_by_id(params[:id])
     if @item.nil?
       redirect_to error_url
+    elsif current_user != @item.owner
+      redirect_to root_url
     else
       @title = @item.category.name.capitalize + " item"
     end
@@ -47,7 +49,15 @@ class ItemsController < ApplicationController
   def transfer
     @item = Item.find_by_id(params[:id])
     @receiver = User.find_by_id(params[:receiver_id])
-    redirect_to @item, :notice => "#{@receiver.name}"
+    
+    if @item.nil? or @receiver.nil? or @receiver == @item.owner
+      redirect_to error_url
+      return
+    end
+    
+    @item.transfer!(@receiver)
+    flash[:sucess] = "A #{@item.category.name.capitalize} item is successfully transfered to #{@receiver.name}"
+    redirect_to items_wishes_url(current_user)
   end
 
 end

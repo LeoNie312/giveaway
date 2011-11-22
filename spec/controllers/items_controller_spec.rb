@@ -27,6 +27,14 @@ describe ItemsController do
       get :show, :id => 100000
       response.should redirect_to(error_url)
     end
+    
+    it "should be visible only to the owner" do
+      another_user = Factory(:user, :name => Factory.next(:name), :email => Factory.next(:email))
+      his_item = another_user.items.create!(:category_id => @drink.id)
+      
+      get :show, :id => his_item.id
+      response.should redirect_to(root_url)
+    end
   end
   
   describe "GET 'new'" do
@@ -118,7 +126,22 @@ describe ItemsController do
     
     it "should be redirect" do
       put :transfer, :id => @item.id, :receiver_id => @receiver
-      response.should be_redirect
+      response.should redirect_to(items_wishes_url(@user))
+    end
+    
+    it "should redirect to error page when item not found" do
+      put :transfer, :id => 100000000, :receiver_id => @receiver
+      response.should redirect_to(error_url)
+    end
+    
+    it "should redirect to error page when receiver not found" do
+      put :transfer, :id => @item, :receiver_id => 10000000000
+      response.should redirect_to(error_url)
+    end
+    
+    it "should redirect to error page when receiver is the owner" do
+      put :transfer, :id => @item, :receiver_id => @user
+      response.should redirect_to(error_url)
     end
   end
   
