@@ -48,11 +48,15 @@ class Item < ActiveRecord::Base
     self.save!
   end
   
+  
   # This method should toggle onshelf attribute,
   # and calculate onshelf_at time
-  #
-  # def reonshelf
-  # end
+  
+  def re_onshelf
+    self.onshelf = true
+    self.onshelf_at = DateTime.now
+    self.save
+  end
   
   private
     def calculate_onshelf_time

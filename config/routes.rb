@@ -10,7 +10,7 @@ Giveaway::Application.routes.draw do
   resources :users do
     member do
       post 'checkin', :to => 'users#checkin' 
-      # get 'offshelf_items', :to => 'users#offshelf_items' 
+      get 'offshelf_items', :to => 'users#offshelf_items' 
     end
   end
   
@@ -22,7 +22,10 @@ Giveaway::Application.routes.draw do
       get 'search', :to => 'items#search_items' # search_items_path
     end
     
-    put 'transfer', :to => 'items#transfer', :on => :member
+    member do
+      put 'transfer', :to => 'items#transfer'
+      put 're_onshelf', :to => 'items#re_onshelf'
+    end
   end
   
 #### resources routes ####
@@ -32,7 +35,7 @@ Giveaway::Application.routes.draw do
   match '/signout', :to => 'sessions#destroy'
   match '/checkin', :to => 'users#checkin', :via => :post
   match '/connect', :to => 'wishes#connect', :via => :post
-
+  
   root :to => "pages#home"
   
   match '/about' => "pages#about"

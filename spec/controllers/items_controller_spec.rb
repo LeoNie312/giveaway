@@ -143,6 +143,44 @@ describe ItemsController do
       put :transfer, :id => @item, :receiver_id => @user
       response.should redirect_to(error_url)
     end
+    
+    it "should redirect to home page when the item dosen't belong to current user" do
+      another_user = Factory(:user, :name => Factory.next(:name), :email => Factory.next(:email))
+      his_item = Factory(:item, :owner => another_user, :category_id => @drink.id)
+      
+      put :transfer, :id => his_item, :receiver_id => @receiver
+      response.should redirect_to(root_url)
+    end
+  end
+  
+  describe "UPDATE 're_onshelf'" do
+    
+    before :each do
+      @user = Factory(:user)
+      test_sign_in @user
+      @item = Factory(:item, :category_id => @drink.id, :owner => @user)
+      @item.onshelf_at = nil
+      @item.onshelf = false
+      @item.save!
+    end
+    
+    it "should redirect to items_wishes_url" do
+      put :re_onshelf, :id => @item
+      response.should redirect_to(items_wishes_url(@user))
+    end
+    
+    it "should redirect to error page when item not found" do
+      put :re_onshelf, :id => 100000000
+      response.should redirect_to(error_url)
+    end
+    
+    it "should redirect to home page when the item dosen't belong to current user" do
+      another_user = Factory(:user, :name => Factory.next(:name), :email => Factory.next(:email))
+      his_item = Factory(:item, :owner => another_user, :category_id => @drink.id)
+      
+      put :re_onshelf, :id => his_item
+      response.should redirect_to(root_url)
+    end
   end
   
   describe "authentication" do

@@ -1,15 +1,9 @@
 class ItemsController < ApplicationController
   before_filter :authenticate
+  before_filter :owner_access, :only => [:show, :transfer, :re_onshelf]
   
   def show
-    @item = Item.find_by_id(params[:id])
-    if @item.nil?
-      redirect_to error_url
-    elsif current_user != @item.owner
-      redirect_to root_url
-    else
-      @title = @item.category.name.capitalize + " item"
-    end
+    @title = @item.category.name.capitalize + " item"
   end
   
   def new
@@ -47,10 +41,9 @@ class ItemsController < ApplicationController
   end
   
   def transfer
-    @item = Item.find_by_id(params[:id])
     @receiver = User.find_by_id(params[:receiver_id])
     
-    if @item.nil? or @receiver.nil? or @receiver == @item.owner
+    if @receiver.nil? or @receiver == @item.owner
       redirect_to error_url
       return
     end
@@ -59,5 +52,22 @@ class ItemsController < ApplicationController
     flash[:sucess] = "A #{@item.category.name.capitalize} item is successfully transfered to #{@receiver.name}"
     redirect_to items_wishes_url(current_user)
   end
+  
+  def re_onshelf
+    @item.re_onshelf
+    flash[:success] = "A #{@item.category.name} item is onshelved again!"
+    redirect_to items_wishes_url(current_user)
+  end
+  
+  private
+    def owner_access
+      @item = Item.find_by_id(params[:id])
+      
+      if @item.nil?
+        redirect_to error_url
+      elsif current_user != @item.owner
+        redirect_to root_url
+      end
+    end
 
 end

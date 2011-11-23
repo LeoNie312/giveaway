@@ -256,6 +256,18 @@ describe UsersController do
       response.should have_selector("title", :content => "Items & Wishes")
     end
   end
+  
+  describe "GET 'offshelf_items' page" do
+    before(:each) do
+      @user = Factory(:user)
+      test_sign_in(@user)
+    end
+    
+    it "should be successful" do
+      get :offshelf_items, :id => @user
+      response.should be_success
+    end
+  end
 end
 
 

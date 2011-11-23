@@ -1,0 +1,12 @@
+<div class="item-info">
+	<span class="category-tag"><%= offshelf_item.category.name.capitalize %></span>
+	<span class="item-description"><%= link_to offshelf_item.description, offshelf_item %></span><br/>
+	<span class="img-link">img url: 
+	<%= link_to offshelf_item.img_link, offshelf_item.img_link, target:'_blank' %></span><br/>
+</div>
+
+<div id="re-onshelf-button">
+	<%= form_tag '#' do %>
+		<%= submit_tag 'Onshelf this'%>
+	<% end %>
+</div>	

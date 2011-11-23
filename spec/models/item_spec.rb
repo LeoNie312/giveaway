@@ -148,6 +148,31 @@ describe Item do
     end
   end
   
+  describe "re-onshelf" do
+    
+    before :each do
+      @item = @owner.items.create(@attr)
+      @item.onshelf_at = nil
+      @item.onshelf = false
+      @item.save!
+    end
+    
+    it "should responde to a 're_onshelf' method" do
+      @item.should respond_to(:re_onshelf)
+    end
+    
+    it "should have 'onshelf' attribute set to true" do
+      @item.re_onshelf
+      @item.should be_onshelf
+    end
+    
+    it "should have 'onshelf_at' time calculated" do
+      @item.re_onshelf
+      time = DateTime.now
+      @item.onshelf_at.should_not be_nil
+    end
+  end
+  
   describe "validation" do
     
     it "should reject description that is too long" do 

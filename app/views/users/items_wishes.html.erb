@@ -10,7 +10,7 @@
 	<%= render item if item.onshelf? %>
 	<% end %>
 	</ul>
-	<%= link_to "See my off-shelf items", "#" %>
+	<%= link_to "See my off-shelf items", offshelf_items_user_path(@user) %>
 </div>
 
 <div id="user_wishes_list">

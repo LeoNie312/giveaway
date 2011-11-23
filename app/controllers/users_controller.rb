@@ -52,8 +52,12 @@ class UsersController < ApplicationController
   end
   
   def items_wishes
-    @user = User.find(params[:id])
     @title = "Items & Wishes"
+  end
+  
+  def offshelf_items
+    @title = "Offshelf Items"
+    @offshelf_items = @user.items.where(:onshelf_at => nil)
   end
   
   private

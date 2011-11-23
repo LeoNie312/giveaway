@@ -7,7 +7,9 @@
 		<span class="category-tag"><%= onshelf_item.category.name.capitalize %></span>
 		<span class="item-description"><%= onshelf_item.description %></span><br/>
 		<span class="img-link">img url: <%= link_to onshelf_item.img_link, onshelf_item.img_link, target: '_blank' %></span><br/>
-		<span class="item-extra-info"><%= time_ago_in_words(onshelf_item.onshelf_at) %> ago at <strong>somewhere</strong></span>
+		<% location = onshelf_item.owner.location %>
+		<span class="item-extra-info"><%= time_ago_in_words(onshelf_item.onshelf_at) %> ago at 
+			<strong><%= (location.nil?)? "somewhere" : location.name %></strong></span>
 	</td>
 	<td class="item-interaction">	
 		<% unless onshelf_item.owner == current_user %>
