@@ -6,7 +6,7 @@
 </div>
 
 <div id="re-onshelf-button">
-	<%= form_tag '#' do %>
-		<%= submit_tag 'Onshelf this'%>
+	<%= form_tag re_onshelf_item_path(offshelf_item), :method => :put do %>
+		<%= submit_tag 'Onshelf this', :confirm => "Are you sure to onshelf this?" %>
 	<% end %>
 </div>	
