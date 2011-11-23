@@ -85,6 +85,13 @@ describe Wish do
         @wish.connect(item).should be_false
       end
       
+      it "should not connect to an offshelf item" do
+        @item.onshelf_at = nil
+        @item.onshelf = false
+        @item.save!
+        @wish.connect(@item).should be_false
+      end
+      
       describe "after connecting to an item" do
       
         before :each do

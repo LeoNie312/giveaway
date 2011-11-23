@@ -18,10 +18,10 @@ class Wish < ActiveRecord::Base
     # which is posted by oneself, or
     # the wish is still connecting to an item,
     # the 'connect' method will return false
-    unless item.owner == wanter || self.item != nil
+    unless item.owner == wanter || self.item != nil || !item.onshelf?
       self.connected_at = DateTime.now
       self.item_id = item.id
-      self.toggle!(:connected) unless self.connected?
+      self.connected = true
       self.save
     end
   end
@@ -29,7 +29,7 @@ class Wish < ActiveRecord::Base
   def disconnect!
     self.item_id = nil
     self.connected_at = nil
-    self.toggle!(:connected) if self.connected?
+    self.connected = false
     self.save!
   end
 end

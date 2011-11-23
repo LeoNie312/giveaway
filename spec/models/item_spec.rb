@@ -64,6 +64,12 @@ describe Item do
         db_wish.connected.should be_false
       end
     end
+    
+    it "should not save offshelf item with wishes connected" do
+      lambda do
+        @item.toggle!(:onshelf)
+      end.should raise_exception 
+    end
   end
   
   describe "owner association" do
@@ -193,7 +199,7 @@ describe Item do
       item.onshelf_at.should_not be_nil
     end
     
-    it "should require the onshelf time when it's transferred"
+    it "should require the onshelf time when it's re-onshelved"
   end
   
 

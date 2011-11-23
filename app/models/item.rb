@@ -5,6 +5,8 @@ class Item < ActiveRecord::Base
   
   before_destroy :disconnect_wishes
   
+  after_save :ensure_invisibility
+  
   link_regex = /^http:\/\/(www.)?[\w+\-]+\.com\//i
   
   validates :description, :length => { :maximum => 100}
@@ -32,8 +34,8 @@ class Item < ActiveRecord::Base
   def transfer!(receiver)
     raise "receiver is owner!" if owner == receiver
     self.owner = receiver
-    self.toggle!(:onshelf) if onshelf?
     self.onshelf_at = nil
+    self.onshelf = false
     
     wishes.each do |wish|
       unless wish.wanter == receiver
@@ -60,6 +62,13 @@ class Item < ActiveRecord::Base
     def disconnect_wishes
       wishes.each do |wish|
         wish.disconnect!
+      end
+    end
+    
+    def ensure_invisibility
+      if !onshelf? and wishes.any? and !onshelf_at.nil?
+        raise "The offshelf item has wishes associated with it remain, 
+                or onshelf_at attribute isn't nil"
       end
     end
 end
