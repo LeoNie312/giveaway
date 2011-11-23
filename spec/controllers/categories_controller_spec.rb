@@ -93,6 +93,17 @@ describe CategoriesController do
       #                 :content => '<input type="submit" value="Memo my wish">')
     end
     
+    it "should not display offshelf items" do
+      @item1.onshelf_at = nil
+      @item1.onshelf = false
+      @item1.save!
+      
+      get :show, :id => @drink
+      response.should_not have_selector("span",
+                      :class => "category-tag",
+                      :content => @drink.name.capitalize) 
+    end
+    
     describe "categories sidebar" do
       
       before :each do

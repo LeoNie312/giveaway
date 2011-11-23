@@ -9,7 +9,8 @@ Giveaway::Application.routes.draw do
 
   resources :users do
     member do
-      post 'checkin', :to => 'users#checkin'  
+      post 'checkin', :to => 'users#checkin' 
+      # get 'offshelf_items', :to => 'users#offshelf_items' 
     end
   end
   

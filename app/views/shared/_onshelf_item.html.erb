@@ -1,7 +1,7 @@
 <tr class="item round">
 	<td class="gravatar">
-		<%= link_to gravatar_for(onshelf_item.owner), onshelf_item.owner %><br/>
-		<span class="owner-name"><%= link_to onshelf_item.owner.name, onshelf_item.owner %></span>
+		<%= gravatar_for(onshelf_item.owner) %><br/>
+		<span class="owner-name"><%= onshelf_item.owner.name %></span>
 	</td>
 	<td class="item-info">	
 		<span class="category-tag"><%= onshelf_item.category.name.capitalize %></span>
