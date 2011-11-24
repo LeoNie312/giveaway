@@ -215,7 +215,7 @@ describe Item do
     end
     
     it "should require the owner id" do
-      Item.new(@attr)
+      Item.new(@attr.merge(:owner_id => @owner.id))
         .should_not be_valid
     end
     
@@ -224,7 +224,6 @@ describe Item do
       item.onshelf_at.should_not be_nil
     end
     
-    it "should require the onshelf time when it's re-onshelved"
   end
   
 

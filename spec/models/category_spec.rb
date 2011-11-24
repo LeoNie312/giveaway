@@ -25,7 +25,13 @@ describe Category do
       @drink.items.should == [@item2, @item1]
     end
     
-    it "should have the right items in the right order, when one item is re-onshelved"
+    it "should not include offshelf item" do
+      @item1.onshelf_at = nil
+      @item1.onshelf = false
+      @item1.save!
+      @drink.reload
+      @drink.items.should_not include(@item1)
+    end
 
   end
   
